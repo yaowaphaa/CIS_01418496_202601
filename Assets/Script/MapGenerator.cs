@@ -8,7 +8,7 @@ public class MapGenerator : MonoBehaviour
 
     public int tileCount = 5;
     public float tileLength = 240f;   // ใส่ค่าจริงของคุณ
-    public float deleteDistance = 300f; // ระยะที่จะลบแมพข้างหลัง
+    public float deleteDistance = 200f; // ระยะที่จะลบแมพข้างหลัง
 
     private float spawnX = 0;
     private List<GameObject> activeTiles = new List<GameObject>();
