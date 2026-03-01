@@ -5,7 +5,10 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+<<<<<<< HEAD
   - Enemy
+=======
+>>>>>>> ceed4a6498761b0b092019ffc7f2dbf3e098ff88
   layers:
   - Default
   - TransparentFX
