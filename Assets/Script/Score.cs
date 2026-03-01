@@ -2,14 +2,23 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    public static int score = 0;
+    public static int score = 0;   // เหรียญสะสมทั้งหมด
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            
-            Debug.Log(Score.score += 1); // แสดงผลในคอนโซล
-            Destroy(gameObject);       // ทำให้ของหาย
+            score += 1; // 💰 เพิ่มเหรียญสะสม
+            Debug.Log("🎒 Total Coins: " + score);
+
+            // 🔵 เพิ่ม Mana ในด่าน
+            PlayerAttack player = other.GetComponent<PlayerAttack>();
+            if (player != null)
+            {
+                player.AddMana(1);
+            }
+
+            Destroy(gameObject);
         }
     }
 }

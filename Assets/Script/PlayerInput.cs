@@ -23,7 +23,7 @@ public class PlayerInput : MonoBehaviour
         if (rise.IsRising)
             return;
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             if (!hasTurned)
             {
