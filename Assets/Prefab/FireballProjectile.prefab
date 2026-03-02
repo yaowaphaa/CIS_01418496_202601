@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 314356973351927464}
   - component: {fileID: 2071254847445189441}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: FireballProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 3274585299066543766}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -39.9355, y: 3.9512, z: -0.404}
+  m_LocalPosition: {x: 70.36193, y: -0.07337, z: -7.50989}
   m_LocalScale: {x: 0.93633574, y: 1.0701008, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

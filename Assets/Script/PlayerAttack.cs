@@ -10,6 +10,10 @@ public class PlayerAttack : MonoBehaviour
     public int battleMana = 0;       // เหรียญใช้ยิง
     public int[] manaCosts;          // ใส่ 3 ค่าใน Inspector
 
+    [Header("Skill Cooldowns")]
+    public float[] skillCooldowns;   // ใส่ 3 ค่าใน Inspector
+    private float[] lastUsedTimes;   // เก็บเวลาใช้ล่าสุด
+
     // =========================
     // ⚔ SKILL SYSTEM
     // =========================
@@ -17,6 +21,11 @@ public class PlayerAttack : MonoBehaviour
     public GameObject[] skillPrefabs;
     public Transform firePoint;
     public float projectileSpeed = 15f;
+
+    [Header("Spread Skill")]
+    public int spreadCount = 5;        // จำนวนกระสุน
+    public float spreadAngle = 30f;    // มุมกระจายรวม
+
 
     public GameObject targetIndicatorPrefab;
 
@@ -30,7 +39,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         battleMana = 0;   // รีเซ็ตตอนเริ่มด่าน
-
+        lastUsedTimes = new float[skillPrefabs.Length];
         currentIndicator = Instantiate(targetIndicatorPrefab);
         currentIndicator.SetActive(false);
     }
@@ -83,14 +92,34 @@ public class PlayerAttack : MonoBehaviour
             Debug.LogWarning("Skill ยังไม่มี!");
             return;
         }
+        // 🔥 เช็คคูลดาวน์
+        if (Time.time < lastUsedTimes[currentSkill] + skillCooldowns[currentSkill])
+        {
+            float remain = 
+                (lastUsedTimes[currentSkill] + skillCooldowns[currentSkill]) - Time.time;
+
+            Debug.Log("⏳ คูลดาวน์เหลือ: " + remain.ToString("F1") + " วิ");
+            return;
+        }
 
         int cost = manaCosts[currentSkill];
 
         if (!UseMana(cost))
             return;
 
-        CastSkill();
+        // ยิงตามหมายเลขสกิล
+        if (currentSkill == 0)
+        {
+            CastSkill();        // สกิล 1 ยิงเดี่ยว
+        }
+        else if (currentSkill == 1)
+        {
+            CastSpreadSkill();  // สกิล 2 ดาวกระจาย
+        }
+        
+        lastUsedTimes[currentSkill] = Time.time;
     }
+    
     // =========================
     // ⚔ SKILL FUNCTIONS
     // =========================
@@ -179,4 +208,36 @@ public class PlayerAttack : MonoBehaviour
 
         Debug.Log("💰 Mana เหลือ: " + battleMana);
     }
+    void CastSpreadSkill()
+    {
+        Vector3 baseDirection = 
+            (currentTarget.position - firePoint.position).normalized;
+
+        float angleStep = spreadAngle / (spreadCount - 1);
+        float startAngle = -spreadAngle / 2f;
+
+        for (int i = 0; i < spreadCount; i++)
+        {
+            float angle = startAngle + (angleStep * i);
+
+            Quaternion rotation = 
+                Quaternion.AngleAxis(angle, Vector3.up);
+
+            Vector3 direction = rotation * baseDirection;
+
+            GameObject projectile = Instantiate(
+                skillPrefabs[currentSkill],
+                firePoint.position,
+                Quaternion.LookRotation(direction)
+            );
+
+            Rigidbody rb = projectile.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.linearVelocity = direction * projectileSpeed;
+            }
+        }
+        Debug.Log("💰 Mana เหลือ: " + battleMana);
+    }
+    ฆ
 }

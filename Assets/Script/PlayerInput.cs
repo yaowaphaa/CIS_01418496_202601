@@ -27,7 +27,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (!hasTurned)
             {
-                model.localRotation = Quaternion.Euler(0f, 90f, 0f);
+                model.localRotation = Quaternion.Euler(0f, 0f, 0f);
                 hasTurned = true;
             }
 
