@@ -20,4 +20,4 @@ public class SpreadProjectile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-}ฆ
+}

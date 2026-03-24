@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
     // =========================
     // ⚔ SKILL SYSTEM
     // =========================
-
+    public RectTransform crosshair;
     public GameObject[] skillPrefabs;
     public Transform firePoint;
     public float projectileSpeed = 15f;
@@ -48,11 +48,26 @@ public class PlayerAttack : MonoBehaviour
     {
         SelectSkill();
         DetectTarget();
-
+        UpdateCrosshair();
         if (Input.GetMouseButtonDown(0) && currentTarget != null)
         {
             TryCastSkill();
         }
+    }
+    void UpdateCrosshair()
+    {
+         if (currentSkill != -1 && crosshair != null)
+        {
+            // แสดงและเคลื่อนที่ crosshair ตามเมาส์
+            crosshair.gameObject.SetActive(true);
+            crosshair.position = Input.mousePosition;
+        }
+        else if (crosshair != null)
+        {
+            // ซ่อน crosshair ถ้ายังไม่ได้เลือกสกิล
+            crosshair.gameObject.SetActive(false);
+        }
+        
     }
 
     // =========================
@@ -104,9 +119,12 @@ public class PlayerAttack : MonoBehaviour
 
         int cost = manaCosts[currentSkill];
 
+        // ถ้า mana ไม่พอ → หยุดใช้สกิล
         if (!UseMana(cost))
+        {
+            Debug.Log("❌ ไม่สามารถใช้สกิลได้, mana ไม่พอ");
             return;
-
+        }
         // ยิงตามหมายเลขสกิล
         if (currentSkill == 0)
         {
@@ -118,6 +136,10 @@ public class PlayerAttack : MonoBehaviour
         }
         
         lastUsedTimes[currentSkill] = Time.time;
+        // หลังใช้สกิล → ซ่อน crosshair
+        if (crosshair != null) crosshair.gameObject.SetActive(false);
+        currentSkill = -1; // ต้องเลือกสกิลใหม่ก่อนยิงอีกครั้ง
+        Debug.Log("✅ ต้องเลือกสกิลใหม่ก่อนยิงอีกครั้ง");
     }
     
     // =========================
@@ -196,6 +218,7 @@ public class PlayerAttack : MonoBehaviour
             Quaternion.identity
         );
 
+
         Vector3 direction = (currentTarget.position - firePoint.position).normalized;
 
         projectile.transform.rotation = Quaternion.LookRotation(direction);
@@ -239,5 +262,5 @@ public class PlayerAttack : MonoBehaviour
         }
         Debug.Log("💰 Mana เหลือ: " + battleMana);
     }
-    ฆ
+    
 }

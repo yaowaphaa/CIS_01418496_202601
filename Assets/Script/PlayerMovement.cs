@@ -13,30 +13,42 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded;
 
     private PlayerRise rise;
-    private PlayerInput input;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         rise = GetComponent<PlayerRise>();
-        input = GetComponent<PlayerInput>();
+    }
+
+    void Update()
+    {
+        if (rise.IsRising) return;
+
+        // กระโดด
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+        }
     }
 
     void FixedUpdate()
     {
-        if (rise.IsRising || !input.CanMove) return;
+        if (rise.IsRising) return;
 
+        // วิ่งไปข้างหน้าอัตโนมัติ
         Vector3 move = Vector3.right * speed;
 
-        if (input.MoveRight)
+        // ซ้ายขวา
+        if (Input.GetKey(KeyCode.D))
             move += Vector3.back * horizontalSpeed;
 
-        if (input.MoveLeft)
+        if (Input.GetKey(KeyCode.A))
             move += Vector3.forward * horizontalSpeed;
 
         rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
 
+        // เพิ่มแรงตก
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity += Vector3.up * Physics.gravity.y *
@@ -70,4 +82,4 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
     }
-}   
+}

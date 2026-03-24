@@ -5,9 +5,13 @@ public class Enemy : MonoBehaviour
     public int maxHealth = 2;
     private int currentHealth;
 
+    public GameObject itemPrefab;
+    private EnemyDrop dropSystem; 
+
     void Start()
     {
-        currentHealth = maxHeaฆlth;
+        currentHealth = maxHealth;
+         dropSystem = GetComponent<EnemyDrop>();
     }
 
     public void TakeDamage(int damage)
@@ -25,6 +29,16 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Debug.Log("มอนตาย!");
+        if (dropSystem != null)
+        {
+            dropSystem.Drop(); // 👈 เรียกดรอปตรงนี้
+        }
+        else
+        {
+            Debug.LogWarning("ไม่มี EnemyDrop!");
+        }
+        
+
         Destroy(gameObject);
     }
 }

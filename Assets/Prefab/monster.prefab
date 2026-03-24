@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3122935770400976947}
   - component: {fileID: 3834785299053458291}
   - component: {fileID: 8006953909956575760}
+  - component: {fileID: -462056444377750276}
   m_Layer: 0
   m_Name: monster
   m_TagString: Enemy
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4726842676110856679}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 52.99, y: 1.64, z: -0.404}
+  m_LocalPosition: {x: 117.16123, y: 0.988, z: 0.4010088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -156,3 +157,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 2
+  itemPrefab: {fileID: 0}
+--- !u!114 &-462056444377750276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4726842676110856679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e39ea3df072b448bb53865074a9ba0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  dropItems:
+  - itemPrefab: {fileID: 692020459545026157, guid: ecf3dabbb6c3e1247aa495271008c79f, type: 3}
+    dropChance: 100
+  minDrop: 1
+  maxDrop: 15

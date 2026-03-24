@@ -1,9 +1,12 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Fireball : MonoBehaviour
 {
     public float lifeTime = 3f;
     public float damage = 20f;
+
+    private List<GameObject> hitEnemies = new List<GameObject>();
 
     void Start()
     {
@@ -12,12 +15,21 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // ถ้าโดนศัตรู
-        if (other.CompareTag("Enemy"))
+        // ตรวจโดนศัตรู
+        if (other.CompareTag("Enemy") && !hitEnemies.Contains(other.gameObject))
         {
-            // ตัวอย่างเรียกเลือดศัตรู
-            // other.GetComponent<EnemyHealth>().TakeDamage(damage);
+            hitEnemies.Add(other.gameObject);
 
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
+                enemy.TakeDamage((int)damage);
+
+            // ❌ ไม่ Destroy ทันที → Fireball โดนหลายตัวได้
+        }
+
+        // ถ้าโดนพื้น / กำแพง → Destroy
+        if (other.CompareTag("Ground") || other.CompareTag("Wall"))
+        {
             Destroy(gameObject);
         }
     }
