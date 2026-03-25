@@ -2,13 +2,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement; 
 
 public class LobbyManager : MonoBehaviour
-{
-    public string gameSceneName = "SelectMap1"; 
-
+{ 
     public void LoadLevel1()
     {
         
-        SceneManager.LoadScene(gameSceneName);
+        SceneManager.LoadScene("SelectMap1");
     }
 
     /*public void ExitGame()
