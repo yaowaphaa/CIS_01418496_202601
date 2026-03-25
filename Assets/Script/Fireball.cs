@@ -10,12 +10,14 @@ public class Fireball : MonoBehaviour
 
     void Start()
     {
+        
         Destroy(gameObject, lifeTime);
     }
 
     void OnTriggerEnter(Collider other)
     {
         // ตรวจโดนศัตรู
+        Debug.Log("Fireball ชนโดน: " + other.name + " Tag: " + other.tag);
         if (other.CompareTag("Enemy") && !hitEnemies.Contains(other.gameObject))
         {
             hitEnemies.Add(other.gameObject);

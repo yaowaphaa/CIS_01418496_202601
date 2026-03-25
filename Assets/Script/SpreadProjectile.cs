@@ -16,7 +16,6 @@ public class SpreadProjectile : MonoBehaviour
         {
             // ถ้ามีระบบเลือด:
             // other.GetComponent<EnemyHealth>()?.TakeDamage(damage);
-
             Destroy(gameObject);
         }
     }

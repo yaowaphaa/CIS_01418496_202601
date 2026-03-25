@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     public float fallMultiplier = 2.5f;
 
     private Rigidbody rb;
-    private Animator animator;
+    public Animator childAnim;
+    
     private bool isGrounded;
 
     private PlayerRise rise;
@@ -17,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        animator = GetComponentInChildren<Animator>();
+        
         rise = GetComponent<PlayerRise>();
     }
 
@@ -63,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        animator.SetBool("isJumping", true);
+        childAnim.SetBool("IsJumpping", true);
     }
 
     void OnCollisionStay(Collision collision)
@@ -71,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             isGrounded = true;
-            animator.SetBool("isJumping", false);
+            childAnim.SetBool("IsJumpping", false);
         }
     }
 
