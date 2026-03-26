@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3834785299053458291}
   - component: {fileID: 8006953909956575760}
   - component: {fileID: -462056444377750276}
+  - component: {fileID: 9138483551911063579}
   m_Layer: 0
   m_Name: monster
   m_TagString: Enemy
@@ -109,7 +110,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -139,7 +140,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -157,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 2
-  itemPrefab: {fileID: 692020459545026157, guid: ecf3dabbb6c3e1247aa495271008c79f, type: 3}
+  attackDamage: 1
 --- !u!114 &-462056444377750276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,3 +176,16 @@ MonoBehaviour:
     dropChance: 100
   minDrop: 1
   maxDrop: 15
+--- !u!114 &9138483551911063579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4726842676110856679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f90171015921bd8448d0a9609e9007cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  speed: 3

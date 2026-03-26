@@ -29,23 +29,32 @@ public class PlayerKnockback : MonoBehaviour
         }
     }
 
-    // 🔥 ชนมอนแล้วฆ่าเลย
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
+    // 🔥 Collision แทน Trigger → มอนต้องไม่เป็น Trigger
+    private void OnCollisionEnter(Collision collision)
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-
-            if (enemy != null)
+            if (collision.collider.CompareTag("Enemy"))
             {
-                enemy.TakeDamage(999); // 💀 ตายทันที
-                Debug.Log("ผู้เล่นชนมอน → มอนตาย!");
-            }
+                Enemy enemy = collision.collider.GetComponent<Enemy>();
 
-            // (ถ้าอยากให้ตัวแดงตอนชน)
-            StartCoroutine(FlashRed());
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(999); // 💀 มอนตายทันที
+                    Debug.Log("ผู้เล่นชนมอน → มอนตาย!");
+                }
+
+                // ลดเลือดผู้เล่นด้วย
+                HealthSystem playerHealth = GetComponent<HealthSystem>();
+                if (playerHealth != null)
+                {
+                    // คุณอาจปรับ damage ตามต้องการ
+                    playerHealth.TakeDamage(1); 
+                    Debug.Log("ผู้เล่นถูกมอนชน → ลดเลือด 1");
+                }
+
+                // เอฟเฟกต์ตัวแดง
+                StartCoroutine(FlashRed());
+            }
         }
-    }
 
     // 🔴 เอฟเฟกต์ตัวแดง
     private IEnumerator FlashRed()
