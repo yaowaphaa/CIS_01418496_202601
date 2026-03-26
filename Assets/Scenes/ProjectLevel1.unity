@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6696444606421988068, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7334841887114003363, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
       propertyPath: m_IsTrigger
       value: 0
@@ -1122,6 +1126,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -462056444377750276, guid: 2a047e60d17e37f43865de6db39ae72a, type: 3}
+      propertyPath: dropItems.Array.data[0].itemPrefab
+      value: 
+      objectReference: {fileID: 692020459545026157, guid: ecf3dabbb6c3e1247aa495271008c79f, type: 3}
     - target: {fileID: 4726842676110856679, guid: 2a047e60d17e37f43865de6db39ae72a, type: 3}
       propertyPath: m_Name
       value: monster (1)

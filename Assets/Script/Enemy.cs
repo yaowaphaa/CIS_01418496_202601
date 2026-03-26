@@ -4,8 +4,8 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 2;
     private int currentHealth;
+     public int attackDamage = 1; // จำนวนเลือดที่ลดต่อการโจมตี
 
-    public GameObject itemPrefab;
     private EnemyDrop dropSystem; 
 
     void Start()
@@ -40,5 +40,24 @@ public class Enemy : MonoBehaviour
         
 
         Destroy(gameObject);
+    }
+
+    // 🔹 ใช้ Trigger แทน Collision
+   private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // 💀 มอนตายทันที
+            Die();
+
+            // (จะเอาหรือไม่เอาก็ได้)
+            HealthSystem playerHealth = other.GetComponent<HealthSystem>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(attackDamage);
+            }
+
+            Debug.Log("ผู้เล่นชนมอน → มอนตาย!");
+        }
     }
 }
