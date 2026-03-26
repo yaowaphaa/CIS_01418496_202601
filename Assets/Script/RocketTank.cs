@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RocketGasTank : MonoBehaviour
+public class RocketTank : MonoBehaviour
 {
     [Header("Detection")]
     public float detectRange = 10f;
