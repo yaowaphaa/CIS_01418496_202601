@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
     public Animator childAnim;
-    
+
     private bool isGrounded;
 
     private PlayerRise rise;
@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        
+
         rise = GetComponent<PlayerRise>();
     }
 
