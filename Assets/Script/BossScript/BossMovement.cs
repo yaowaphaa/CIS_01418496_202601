@@ -4,16 +4,12 @@ public class BossRunnerX : MonoBehaviour
 {
     
     public Transform player; 
-
-    
     public float forwardDistance = 12f; 
     public float smoothTime = 0.2f;     
-    
-    
     public float activationRange = 15f; // ระยะที่ถ้า Player วิ่งมาถึง บอสถึงจะเริ่มรักษาระยะห่าง
-
     private Vector3 currentVelocity = Vector3.zero;
     private bool hasSeenPlayer = false; // ตัวเช็คว่าเริ่มการทำงานหรือยัง
+
 
     void LateUpdate()
     {
