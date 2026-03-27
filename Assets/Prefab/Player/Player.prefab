@@ -249,6 +249,7 @@ GameObject:
   - component: {fileID: 322864488310280306}
   - component: {fileID: 3762773511091615814}
   - component: {fileID: 5204344750162152021}
+  - component: {fileID: 6633589738842397146}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -265,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 666754529516960374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6980196, z: -0, w: 0.7160787}
-  m_LocalPosition: {x: -79.66, y: 1.07, z: 0.14}
+  m_LocalPosition: {x: -79.8, y: 1.07, z: -1.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -445,22 +446,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   battleMana: 0
-  manaCosts: 040000000300000001000000
+  manaCosts: 05000000010000000200000003000000
+  totalCoins: 0
   skillCooldowns:
-  - 3
+  - 5
   - 4
+  - 3
   - 1
   crosshair: {fileID: 0}
   skillPrefabs:
   - {fileID: 3274585299066543766, guid: f34d3da3d3610bb40ae88e49a64c0b13, type: 3}
-  - {fileID: 8226049483450571503, guid: 9c386545e2f1cb6409d21cad345d3d5a, type: 3}
   - {fileID: 1345738452528911391, guid: eead8f884ea60554ea29a00648eedd23, type: 3}
+  - {fileID: 8512235055070505952, guid: 6083bf98b761ba2439ffeb0e4d8203c8, type: 3}
+  - {fileID: 8226049483450571503, guid: 9c386545e2f1cb6409d21cad345d3d5a, type: 3}
   firePoint: {fileID: 3497275010720226644}
   projectileSpeed: 20
+  dashSkill: {fileID: 5204344750162152021}
+  shieldSkill: {fileID: 6633589738842397146}
   spreadCount: 5
   spreadAngle: 30
-  dashSkill: {fileID: 5204344750162152021}
   targetIndicatorPrefab: {fileID: 5669749495242813167, guid: 60f558cf29828944bb3542707f22c905, type: 3}
+  anim: {fileID: 0}
 --- !u!114 &3596969726472145982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,11 +539,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   health: 3
   maxHealth: 3
+  isInvincible: 0
   hearts:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   gameOverPanel: {fileID: 0}
+  damageCooldown: 0.2
 --- !u!114 &5204344750162152021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -554,6 +562,21 @@ MonoBehaviour:
   dashStopDistance: 1.5
   dashDamage: 30
   dashEffectPrefab: {fileID: 1345738452528911391, guid: eead8f884ea60554ea29a00648eedd23, type: 3}
+  postDashInvincibleDuration: 0.3
+--- !u!114 &6633589738842397146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666754529516960374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef720c18bd5f64d40b30a4f222eeec1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShieldSkill
+  shieldDuration: 3
+  shieldVisualPrefab: {fileID: 8512235055070505952, guid: 6083bf98b761ba2439ffeb0e4d8203c8, type: 3}
 --- !u!1 &711602630897679719
 GameObject:
   m_ObjectHideFlags: 0

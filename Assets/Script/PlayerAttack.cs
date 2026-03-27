@@ -20,13 +20,17 @@ public class PlayerAttack : MonoBehaviour
     public GameObject[] skillPrefabs;
     public Transform firePoint;
     public float projectileSpeed = 15f;
+    
+    [Header("Dash Skill")]
+    public DashSkill dashSkill;
+
+    [Header("Shield Skill")]
+    public ShieldSkill shieldSkill;
 
     [Header("Spread Skill")]
     public int spreadCount = 5;
     public float spreadAngle = 30f;
 
-    [Header("Dash Skill")]
-    public DashSkill dashSkill;
 
     public GameObject targetIndicatorPrefab;
 
@@ -55,19 +59,30 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        SelectSkill();
+        SelectSkill();   // เลือกสกิลตามปุ่ม
         DetectTarget();
         UpdateCrosshair();
 
+        // 🎯 กดเมาส์เพื่อใช้สกิลอื่น ๆ (ยกเว้นโล่)
         if (Input.GetMouseButtonDown(0) && currentSkill != -1 && currentTarget != null)
         {
+            // ยกเว้นสกิลโล่ index 2
+            if (currentSkill != 2)
+                TryCastSkill();
+        }
+
+        // ⚡ ใช้สกิลโล่ทันทีเมื่อกด E
+        if (Input.GetKeyDown(KeyCode.E) && shieldSkill != null)
+        {
+            currentSkill = 2; // index โล่
             TryCastSkill();
         }
     }
 
     void UpdateCrosshair()
     {
-        if (currentSkill != -1 && currentTarget != null && crosshair != null)
+        // แสดง crosshair เฉพาะสกิลที่ต้องมีเป้าหมาย (ไม่ใช่โล่)
+        if (currentSkill != -1 && currentTarget != null && currentSkill != 2 && crosshair != null)
         {
             crosshair.gameObject.SetActive(true);
             crosshair.position = Input.mousePosition;
@@ -138,35 +153,39 @@ public class PlayerAttack : MonoBehaviour
             anim.SetTrigger("Attack");
 
         // ⚔ ใช้สกิล
-        if (currentSkill == 0)
+        switch (currentSkill)
         {
-            CastSkill();
-        }
-        else if (currentSkill == 1)
-        {
-            CastSpreadSkill();
-        }
-        else if (currentSkill == 2 && dashSkill != null)
-        {
-            dashSkill.StartDash(currentTarget, () =>
-            {
-                Debug.Log("Dash เสร็จ");
-            });
+            case 0: // ปกติ
+                CastSkill();
+                break;
+            case 1: // Dash
+                if (dashSkill != null)
+                    dashSkill.StartDash(currentTarget, () => Debug.Log("Dash เสร็จ"));
+                break;
+            case 2: // โล่
+                if (shieldSkill != null)
+                    shieldSkill.ActivateShield();
+                break;
+            case 3: // Spread
+                CastSpreadSkill();
+                break;
         }
 
         lastUsedTimes[currentSkill] = Time.time;
 
+        // ✅ ใช้แล้วให้ crosshair หายไป
         if (crosshair != null)
             crosshair.gameObject.SetActive(false);
 
+        // รีเซ็ต currentSkill หลังใช้
         currentSkill = -1;
     }
-
     void SelectSkill()
     {
         if (Input.GetKeyDown(KeyCode.Q)) currentSkill = 0;
         else if (Input.GetKeyDown(KeyCode.W)) currentSkill = 1;
-        else if (Input.GetKeyDown(KeyCode.E)) currentSkill = 2;
+        //else if (Input.GetKeyDown(KeyCode.E)) currentSkill = 2; ห้ามเอาคอมเมนท์ออก 
+        else if (Input.GetKeyDown(KeyCode.R)) currentSkill = 3;
     }
 
     void DetectTarget()

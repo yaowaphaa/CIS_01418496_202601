@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         dropSystem = GetComponent<EnemyDrop>();
     }
+    
 
     public void TakeDamage(int damage)
     {
@@ -59,4 +60,5 @@ public class Enemy : MonoBehaviour
 
         Die();
     }
+    
 }

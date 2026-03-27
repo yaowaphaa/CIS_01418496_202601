@@ -9,6 +9,7 @@ public class DashSkill : MonoBehaviour
     public float dashStopDistance = 1.5f;
     public int dashDamage = 30;
     public GameObject dashEffectPrefab;
+    public float postDashInvincibleDuration = 0.3f; // ช่วงสั้นๆ หลัง Dash
 
     private bool isDashing = false;
     private HealthSystem playerHealth;
@@ -30,11 +31,11 @@ public class DashSkill : MonoBehaviour
     {
         isDashing = true;
 
-        // ⚡ เปิดอมตะตอน Dash
+        // 1️⃣ ระหว่าง Dash → ผู้เล่นอมตะและไม่โดนดาเมจ
         if (playerHealth != null)
         {
             playerHealth.isInvincible = true;
-            Debug.Log("🟡 เริ่ม Dash → อมตะ");
+            Debug.Log("🟡 เริ่ม Dash → ผู้เล่นอมตะและไม่โดนดาเมจมอน");
         }
 
         GameObject effect = null;
@@ -44,6 +45,7 @@ public class DashSkill : MonoBehaviour
             effect.transform.SetParent(transform);
         }
 
+        // --- Dash ไปยังเป้าหมาย ---
         while (target != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
@@ -53,7 +55,7 @@ public class DashSkill : MonoBehaviour
 
             if (distance <= dashStopDistance)
             {
-                DealDamage(target);
+                // ไม่ทำดาเมจตอน Dash
                 break;
             }
 
@@ -63,26 +65,36 @@ public class DashSkill : MonoBehaviour
         if (effect != null)
             Destroy(effect, 0.5f);
 
-        // ⚡ ปิดอมตะหลัง Dash + เพิ่มช่วงสั้น ๆ (0.3s)
+        // 2️⃣ หลัง Dash → ผู้เล่นยังอมตะ, มอนที่ชนตายทันที
+        float timer = 0f;
+        Debug.Log("🟢 หลัง Dash → ช่วงอมตะสั้นๆ มอนโดนตาย, ผู้เล่นไม่โดนดาเมจ");
+
+        while (timer < postDashInvincibleDuration)
+        {
+            // ตรวจสอบมอนที่ชนผู้เล่น
+            Collider[] hits = Physics.OverlapSphere(transform.position, 1f); // ปรับ radius ตามต้องการ
+            foreach (var hit in hits)
+            {
+                Enemy enemy = hit.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(9999); // ตายทันที
+                    Debug.Log("💀 มอน " + enemy.name + " ตายจากการชนผู้เล่น");
+                }
+            }
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        // 3️⃣ หลังช่วงสั้นๆ → กลับเป็นปกติ
         if (playerHealth != null)
         {
-            yield return new WaitForSeconds(0.3f);
             playerHealth.isInvincible = false;
-            Debug.Log("🔴 ปิดอมตะหลัง Dash");
+            Debug.Log("🔴 ช่วงสั้นๆ จบ → ผู้เล่นกลับเป็นปกติ");
         }
 
         isDashing = false;
         onComplete?.Invoke();
-    }
-
-    private void DealDamage(Transform target)
-    {
-        if (target == null) return;
-        Enemy enemy = target.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage(dashDamage);
-            Debug.Log("💥 Dash โดน! ดาเมจ: " + dashDamage);
-        }
     }
 }

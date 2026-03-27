@@ -188,6 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90171015921bd8448d0a9609e9007cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  speed: 10
+  speed: 3
   rotationSpeed: 200
   obstacleCheckDistance: 1
