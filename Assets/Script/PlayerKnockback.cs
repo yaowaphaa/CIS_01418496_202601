@@ -34,23 +34,7 @@ public class PlayerKnockback : MonoBehaviour
         {
             if (collision.collider.CompareTag("Enemy"))
             {
-                Enemy enemy = collision.collider.GetComponent<Enemy>();
-
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(999); // 💀 มอนตายทันที
-                    Debug.Log("ผู้เล่นชนมอน → มอนตาย!");
-                }
-
-                // ลดเลือดผู้เล่นด้วย
-                HealthSystem playerHealth = GetComponent<HealthSystem>();
-                if (playerHealth != null)
-                {
-                    // คุณอาจปรับ damage ตามต้องการ
-                    playerHealth.TakeDamage(1); 
-                    Debug.Log("ผู้เล่นถูกมอนชน → ลดเลือด 1");
-                }
-
+                
                 // เอฟเฟกต์ตัวแดง
                 StartCoroutine(FlashRed());
             }

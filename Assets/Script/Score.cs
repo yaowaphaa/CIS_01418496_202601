@@ -9,7 +9,7 @@ public class Score : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             score += 1; // 💰 เพิ่มเหรียญสะสม
-            Debug.Log("🎒 Total Coins: " + score);
+            
 
             // 🔵 เพิ่ม Mana ในด่าน
             PlayerAttack player = other.GetComponent<PlayerAttack>();

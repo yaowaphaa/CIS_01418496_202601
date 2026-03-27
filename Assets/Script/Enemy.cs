@@ -4,20 +4,20 @@ public class Enemy : MonoBehaviour
 {
     public int maxHealth = 2;
     private int currentHealth;
-     public int attackDamage = 1; // จำนวนเลือดที่ลดต่อการโจมตี
-
+    public int attackDamage = 1; // ดาเมจที่จะลดเลือดผู้เล่น
+    private bool hasAttacked = false;
+    
     private EnemyDrop dropSystem; 
 
     void Start()
     {
         currentHealth = maxHealth;
-         dropSystem = GetComponent<EnemyDrop>();
+        dropSystem = GetComponent<EnemyDrop>();
     }
 
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-
         Debug.Log("เลือดมอนเหลือ: " + currentHealth);
 
         if (currentHealth <= 0)
@@ -31,33 +31,30 @@ public class Enemy : MonoBehaviour
         Debug.Log("มอนตาย!");
         if (dropSystem != null)
         {
-            dropSystem.Drop(); // 👈 เรียกดรอปตรงนี้
-        }
-        else
-        {
-            Debug.LogWarning("ไม่มี EnemyDrop!");
+            dropSystem.Drop(); 
         }
         
-
         Destroy(gameObject);
     }
 
-    // 🔹 ใช้ Trigger แทน Collision
-   private void OnTriggerEnter(Collider other)
+    
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player"))
+        
+        if (collision.gameObject.CompareTag("Player") && !hasAttacked)
         {
-            // 💀 มอนตายทันที
-            Die();
-
-            // (จะเอาหรือไม่เอาก็ได้)
-            HealthSystem playerHealth = other.GetComponent<HealthSystem>();
+           
+            HealthSystem playerHealth = collision.gameObject.GetComponent<HealthSystem>();
+            
             if (playerHealth != null)
             {
+                hasAttacked = true;
                 playerHealth.TakeDamage(attackDamage);
+                Debug.Log("มอนชนผู้เล่น! ลดเลือด" + attackDamage);
+                
+                
+                Die();
             }
-
-            Debug.Log("ผู้เล่นชนมอน → มอนตาย!");
         }
     }
 }

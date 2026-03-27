@@ -77,7 +77,7 @@ public class PlayerAttack : MonoBehaviour
     public void AddMana(int amount)
     {
         battleMana += amount;
-        Debug.Log("💰 Mana ในด่าน: " + battleMana);
+        
     }
 
     bool UseMana(int amount)
