@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 4673193381571634032}
   - component: {fileID: 322864488310280306}
   - component: {fileID: 3762773511091615814}
+  - component: {fileID: 5204344750162152021}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -264,7 +265,7 @@ Transform:
   m_GameObject: {fileID: 666754529516960374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6980196, z: -0, w: 0.7160787}
-  m_LocalPosition: {x: -50.97, y: 1.07, z: -1.21}
+  m_LocalPosition: {x: -79.66, y: 1.07, z: 0.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -444,18 +445,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   battleMana: 0
-  manaCosts: 0100000003000000
+  manaCosts: 040000000300000001000000
   skillCooldowns:
-  - 2
-  - 5
+  - 3
+  - 4
+  - 1
   crosshair: {fileID: 0}
   skillPrefabs:
   - {fileID: 3274585299066543766, guid: f34d3da3d3610bb40ae88e49a64c0b13, type: 3}
   - {fileID: 8226049483450571503, guid: 9c386545e2f1cb6409d21cad345d3d5a, type: 3}
+  - {fileID: 1345738452528911391, guid: eead8f884ea60554ea29a00648eedd23, type: 3}
   firePoint: {fileID: 3497275010720226644}
   projectileSpeed: 20
   spreadCount: 5
   spreadAngle: 30
+  dashSkill: {fileID: 5204344750162152021}
   targetIndicatorPrefab: {fileID: 5669749495242813167, guid: 60f558cf29828944bb3542707f22c905, type: 3}
 --- !u!114 &3596969726472145982
 MonoBehaviour:
@@ -534,6 +538,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gameOverPanel: {fileID: 0}
+--- !u!114 &5204344750162152021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666754529516960374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eeec9ff2853f764880129a62c8b185c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DashSkill
+  dashSpeed: 25
+  dashStopDistance: 1.5
+  dashDamage: 30
+  dashEffectPrefab: {fileID: 1345738452528911391, guid: eead8f884ea60554ea29a00648eedd23, type: 3}
 --- !u!1 &711602630897679719
 GameObject:
   m_ObjectHideFlags: 0

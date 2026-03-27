@@ -7,6 +7,7 @@ public class HealthSystem : MonoBehaviour
     [Header("Health Settings")]
     public int health = 3; 
     public int maxHealth = 3;
+    [HideInInspector] public bool isInvincible = false; // ⚡ เพิ่ม flag อมตะชั่วครู่
 
     [Header("UI Elements")]
     public Image[] hearts;        
@@ -15,69 +16,52 @@ public class HealthSystem : MonoBehaviour
 
     void Start()
     {
-       
         if (gameOverPanel != null) gameOverPanel.SetActive(false);
         Time.timeScale = 1f; 
-        
         UpdateHeartsUI();
     }
-    void Update()
-    {
-        /* ทดสอบ: กด Spacebar แล้วเลือดลด 1 (เอาไว้เช็ก UI หัวใจ)
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TakeDamage(1);
-            Debug.Log("ทดสอบลดเลือด: เหลือ " + health);
-        }*/
-    }
 
-    // ฟังก์ชันรับดาเมจ (เรียกใช้จากสคริปต์มอนสเตอร์)
     public void TakeDamage(int damage)
     {
+        if (isInvincible)
+        {
+            Debug.Log("💨 ผู้เล่นอมตะ ไม่ลดเลือด");
+            return; // ไม่ลดเลือดถ้าอมตะ
+        }
+
         if (Time.time < lastDamageTime + 0.2f) return;
+
         health -= damage;
         health = Mathf.Clamp(health, 0, maxHealth);
-        Debug.Log("Current Health in System: " + health);
+        Debug.Log("Current Health: " + health);
         UpdateHeartsUI();
 
         if (health <= 0)
-        {
             GameOver();
-        }
-    }
 
+        lastDamageTime = Time.time;
+    }
 
     void UpdateHeartsUI()
     {
         for (int i = 0; i < hearts.Length; i++)
         {
             if (hearts[i] == null) continue;
-
-            if (i < health){
-                hearts[i].color = Color.white; // เลือดเหลือ = สีปกติ
-            }else{
-                Debug.Log("สั่งให้หัวใจดวงที่ " + i + " กลายเป็นสีดำ");
-                hearts[i].color = Color.black; // เลือดหมด = สีดำ
-            }
-            
+            hearts[i].color = (i < health) ? Color.white : Color.black;
         }
     }
 
     void GameOver()
     {
-        Debug.Log("Game Over! Showing Panel...");
-        
+        Debug.Log("Game Over!");
         if (gameOverPanel != null)
         {
-            gameOverPanel.SetActive(true); 
-            Time.timeScale = 0f;          
-            
+            gameOverPanel.SetActive(true);
+            Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
     }
-
-   
 
     public void Retry()
     {
