@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossScene.unity
     guid: 5a488f7e8eb33d347af564b37c4d9689
+  - enabled: 1
+    path: Assets/Scenes/Map1Phase1.unity
+    guid: e0ea567b7f0c16341ad4892749f67473
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
