@@ -1,0 +1,108 @@
+using UnityEngine;
+using System.Collections;
+[RequireComponent(typeof(Rigidbody))]
+public class PlayerBossMovement : MonoBehaviour
+{
+   
+    public float speed = 5f;            
+    public float horizontalSpeed = 4f;  
+    public float jumpForce = 12f;       
+    public float fallMultiplier = 2.5f; 
+
+    
+    public Animator childAnim;
+    private Rigidbody rb;
+
+   
+    public bool isGrounded;
+    public bool isLanded = true;   
+    public bool isIntroPlaying = false; 
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        if (childAnim == null) childAnim = GetComponentInChildren<Animator>();
+
+        // ล็อคไม่ให้ตัวละครล้ม
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+    }
+
+    void Update()
+    {
+        if (isIntroPlaying) return;
+
+        // ระบบกระโดด
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("กด Space! สถานะพื้น: " + isGrounded);
+            if (isGrounded)
+            {
+                Jump();
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (isIntroPlaying) return;
+
+        // วิ่งไปข้างหน้า (X) และ ซ้ายขวา (Z)
+        Vector3 move = Vector3.right * speed;
+        if (Input.GetKey(KeyCode.D)) move += Vector3.back * horizontalSpeed;
+        if (Input.GetKey(KeyCode.A)) move += Vector3.forward * horizontalSpeed;
+
+        rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
+
+        // ปรับแรงตกให้ดูสมจริง
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+    }
+
+    public void Jump()
+    {
+        rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        if (childAnim != null)
+        {
+            // เช็คชื่อใน Animator ว่า IsJumpping (p 2 ตัว) หรือไม่
+            childAnim.SetBool("IsJumpping", true);
+        }
+        isGrounded = false;
+    }
+
+    void OnCollisionEnter(Collision collision)
+{
+    // เช็คว่าชน "Ground" หรือไม่
+    if (collision.gameObject.CompareTag("Ground"))
+    {
+        isGrounded = true;
+
+        // ถ้าเพิ่งถึงพื้นครั้งแรก
+        if (!isLanded)
+        {
+            isLanded = true; // บรรทัดนี้จะส่งสัญญาณให้สคริปต์กล้องเริ่มทำงานต่อ!
+            
+            if (childAnim != null)
+            {
+                childAnim.SetBool("IsFallingIdle", false);
+                childAnim.SetTrigger("Landing");
+            }
+        }
+
+        if (childAnim != null) childAnim.SetBool("IsJumpping", false);
+    }
+}
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground")) isGrounded = true;
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground")) isGrounded = false;
+    }
+}

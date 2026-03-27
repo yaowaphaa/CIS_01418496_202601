@@ -27,10 +27,16 @@ public class Fireball : MonoBehaviour
                 enemy.TakeDamage((int)damage);
 
             // ❌ ไม่ Destroy ทันที → Fireball โดนหลายตัวได้
+            BossHealth boss = other.GetComponent<BossHealth>();
+            if (boss != null)
+            {
+                boss.TakeDamage(damage); // ส่งดาเมจไปที่ BossHealth
+                Debug.Log("โจมตีบอสเข้าแล้ว!");
+            }
         }
 
         // ถ้าโดนพื้น / กำแพง → Destroy
-        if (other.CompareTag("Ground") || other.CompareTag("Wall"))
+        if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);
         }
