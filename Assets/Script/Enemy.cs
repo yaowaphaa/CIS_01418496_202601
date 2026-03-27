@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Enemy Stats")]
     public int maxHealth = 2;
     private int currentHealth;
-    public int attackDamage = 1; // ดาเมจที่จะลดเลือดผู้เล่น
+
+    public int attackDamage = 1;
     private bool hasAttacked = false;
-    
-    private EnemyDrop dropSystem; 
+
+    private EnemyDrop dropSystem;
 
     void Start()
     {
@@ -18,7 +20,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        Debug.Log("เลือดมอนเหลือ: " + currentHealth);
+        Debug.Log("🩸 เลือดมอนเหลือ: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -28,33 +30,33 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("มอนตาย!");
+        Debug.Log("💀 มอนตาย!");
+
         if (dropSystem != null)
-        {
-            dropSystem.Drop(); 
-        }
-        
+            dropSystem.Drop();
+
         Destroy(gameObject);
     }
 
-    
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if (collision.gameObject.CompareTag("Player") && !hasAttacked)
-        {
-           
-            HealthSystem playerHealth = collision.gameObject.GetComponent<HealthSystem>();
-            
-            if (playerHealth != null)
-            {
-                hasAttacked = true;
-                playerHealth.TakeDamage(attackDamage);
-                Debug.Log("มอนชนผู้เล่น! ลดเลือด" + attackDamage);
-                
-                
-                Die();
-            }
-        }
+        if (!collision.gameObject.CompareTag("Player") || hasAttacked)
+            return;
+
+        HealthSystem playerHealth = collision.gameObject.GetComponent<HealthSystem>();
+        DashSkill dash = collision.gameObject.GetComponent<DashSkill>();
+
+        if (playerHealth == null) return;
+
+        // ❌ ถ้าผู้เล่นกำลัง Dash → ไม่โดนตี
+        if (dash != null && dash.IsDashing()) return;
+
+        // ❌ ถ้าผู้เล่นอมตะ → ไม่โดนตี
+        if (playerHealth.isInvincible) return;
+
+        hasAttacked = true;
+        playerHealth.TakeDamage(attackDamage);
+
+        Die();
     }
 }

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 7827578179111514206}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71.5, y: 8.69, z: 2.44}
+  m_LocalPosition: {x: 29.93, y: 9.81, z: -7.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   enemyPrefab: {fileID: 4726842676110856679, guid: 2a047e60d17e37f43865de6db39ae72a, type: 3}
-  player: {fileID: 9148463236647459186, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+  player: {fileID: 6311696712055885872, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
   minDistanceFromPlayer: 10
   minEnemies: 20
   maxEnemies: 50
