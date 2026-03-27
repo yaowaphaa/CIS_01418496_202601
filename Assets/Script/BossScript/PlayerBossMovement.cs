@@ -45,15 +45,13 @@ public class PlayerBossMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (isIntroPlaying) return;
-
-        // วิ่งไปข้างหน้า (X) และ ซ้ายขวา (Z)
         Vector3 move = Vector3.right * speed;
         if (Input.GetKey(KeyCode.D)) move += Vector3.back * horizontalSpeed;
         if (Input.GetKey(KeyCode.A)) move += Vector3.forward * horizontalSpeed;
 
         rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
 
-        // ปรับแรงตกให้ดูสมจริง
+        
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
@@ -67,7 +65,6 @@ public class PlayerBossMovement : MonoBehaviour
 
         if (childAnim != null)
         {
-            // เช็คชื่อใน Animator ว่า IsJumpping (p 2 ตัว) หรือไม่
             childAnim.SetBool("IsJumpping", true);
         }
         isGrounded = false;
@@ -79,11 +76,10 @@ public class PlayerBossMovement : MonoBehaviour
     if (collision.gameObject.CompareTag("Ground"))
     {
         isGrounded = true;
-
         // ถ้าเพิ่งถึงพื้นครั้งแรก
         if (!isLanded)
         {
-            isLanded = true; // บรรทัดนี้จะส่งสัญญาณให้สคริปต์กล้องเริ่มทำงานต่อ!
+            isLanded = true; // บรรทัดนี้จะส่งสัญญาณให้สคริปต์กล้องเริ่มทำงานต่อ
             
             if (childAnim != null)
             {

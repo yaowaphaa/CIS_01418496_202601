@@ -18,18 +18,12 @@ public class BossRunnerX : MonoBehaviour
     void LateUpdate()
     {
         if (player == null) return;
-
-        // 1. คำนวณระยะห่างปัจจุบัน (แกน X เท่านั้น)
         float distanceToPlayer = transform.position.x - player.position.x;
-
-        // 2. เช็คว่าผู้เล่นวิ่งเข้ามาใกล้พอที่จะ "ปลุก" บอสหรือยัง
         if (!hasSeenPlayer && distanceToPlayer <= activationRange)
         {
-            hasSeenPlayer = true; // บอสโดนปลุกแล้ว!
+            hasSeenPlayer = true;
             Debug.Log("Boss Activated!");
         }
-
-        // 3. ถ้าบอสโดนปลุกแล้ว ถึงจะเริ่มรักษาระยะห่างนำหน้าผู้เล่น
         if (hasSeenPlayer)
         {
             Vector3 targetPosition = new Vector3(player.position.x + forwardDistance, transform.position.y, transform.position.z);
@@ -45,7 +39,6 @@ public class BossRunnerX : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // วาดเส้นรัศมีปลุกบอส (สีแดง)
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, activationRange);
     }

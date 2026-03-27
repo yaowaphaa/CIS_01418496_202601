@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     private float[] lastUsedTimes;   // เก็บเวลาใช้ล่าสุด
 
     // =========================
-    // ⚔ SKILL SYSTEM
+    //         SKILL SYSTEM
     // =========================
     public RectTransform crosshair;
     public GameObject[] skillPrefabs;
@@ -32,12 +32,18 @@ public class PlayerAttack : MonoBehaviour
     private int currentSkill = -1; // -1 = ยังไม่ได้เลือก
     private Transform currentTarget;
     private GameObject currentIndicator;
-
+    public Animator anim;
     private Renderer lastRenderer;
     private Color originalColor;
 
     void Start()
-    {
+    {   
+        if (anim == null) 
+        {
+            anim = GetComponentInChildren<Animator>(); 
+        }
+
+        Debug.Log("Animator ที่ใช้งานอยู่คือ: " + (anim != null ? anim.name : "ยังไม่ได้ใส่!")); 
         battleMana = 0;   // รีเซ็ตตอนเริ่มด่าน
         lastUsedTimes = new float[skillPrefabs.Length];
         currentIndicator = Instantiate(targetIndicatorPrefab);
@@ -49,14 +55,14 @@ public class PlayerAttack : MonoBehaviour
         SelectSkill();
         DetectTarget();
         UpdateCrosshair();
-        if (Input.GetMouseButtonDown(0) && currentTarget != null)
+        if (Input.GetMouseButtonDown(0) && currentSkill != -1 && currentTarget != null)
         {
             TryCastSkill();
         }
     }
     void UpdateCrosshair()
     {
-         if (currentSkill != -1 && crosshair != null)
+         if (currentSkill != -1 && currentTarget != null && crosshair != null)
         {
             // แสดงและเคลื่อนที่ crosshair ตามเมาส์
             crosshair.gameObject.SetActive(true);
@@ -101,8 +107,7 @@ public class PlayerAttack : MonoBehaviour
                 return;
             }
 
-        if (currentSkill >= skillPrefabs.Length ||
-            currentSkill >= manaCosts.Length)
+        if (currentSkill >= skillPrefabs.Length || currentSkill >= manaCosts.Length)
         {
             Debug.LogWarning("Skill ยังไม่มี!");
             return;
@@ -128,10 +133,12 @@ public class PlayerAttack : MonoBehaviour
         // ยิงตามหมายเลขสกิล
         if (currentSkill == 0)
         {
+            anim.SetTrigger("Attack");
             CastSkill();        // สกิล 1 ยิงเดี่ยว
         }
         else if (currentSkill == 1)
         {
+            anim.SetTrigger("Attack");
             CastSpreadSkill();  // สกิล 2 ดาวกระจาย
         }
         
