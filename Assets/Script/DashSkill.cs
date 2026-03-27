@@ -8,7 +8,7 @@ public class DashSkill : MonoBehaviour
     public float dashSpeed = 25f;
     public float dashStopDistance = 1.5f;
     public int dashDamage = 30;
-    public GameObject dashEffectPrefab; // Optional: ใส่ Prefab Particle
+    public GameObject dashEffectPrefab;
 
     private bool isDashing = false;
     private HealthSystem playerHealth;
@@ -18,32 +18,25 @@ public class DashSkill : MonoBehaviour
         playerHealth = GetComponent<HealthSystem>();
     }
 
-    /// <summary>
-    /// เริ่ม Dash ไปยังเป้าหมาย
-    /// </summary>
     public void StartDash(Transform target, Action onComplete = null)
     {
         if (isDashing || target == null) return;
         StartCoroutine(DashRoutine(target, onComplete));
     }
 
-    /// <summary>
-    /// ตรวจสอบว่าผู้เล่นกำลัง Dash อยู่หรือไม่ (ใช้โดยมอน)
-    /// </summary>
-    public bool IsDashing()
-    {
-        return isDashing;
-    }
+    public bool IsDashing() => isDashing;
 
     private IEnumerator DashRoutine(Transform target, Action onComplete)
     {
         isDashing = true;
 
-        // ⚡ ผู้เล่นอมตะชั่วครู่ตอน Dash
+        // ⚡ เปิดอมตะตอน Dash
         if (playerHealth != null)
+        {
             playerHealth.isInvincible = true;
+            Debug.Log("🟡 เริ่ม Dash → อมตะ");
+        }
 
-        // สร้าง Dash Effect ถ้ามี
         GameObject effect = null;
         if (dashEffectPrefab != null)
         {
@@ -55,15 +48,12 @@ public class DashSkill : MonoBehaviour
         {
             Vector3 direction = (target.position - transform.position).normalized;
             float distance = Vector3.Distance(transform.position, target.position);
+
             transform.position += direction * dashSpeed * Time.deltaTime;
 
             if (distance <= dashStopDistance)
             {
                 DealDamage(target);
-
-                // ⚡ หลัง Dash เสร็จ ทำให้ผู้เล่นอมตะชั่วครู่สั้น ๆ
-                StartCoroutine(DashInvincibleCooldown(1f));
-
                 break;
             }
 
@@ -71,35 +61,28 @@ public class DashSkill : MonoBehaviour
         }
 
         if (effect != null)
-            Destroy(effect, 0.5f); // ให้ Particle เล่นจนจบ
+            Destroy(effect, 0.5f);
+
+        // ⚡ ปิดอมตะหลัง Dash + เพิ่มช่วงสั้น ๆ (0.3s)
+        if (playerHealth != null)
+        {
+            yield return new WaitForSeconds(0.3f);
+            playerHealth.isInvincible = false;
+            Debug.Log("🔴 ปิดอมตะหลัง Dash");
+        }
 
         isDashing = false;
         onComplete?.Invoke();
     }
 
-    /// <summary>
-    /// ฟังก์ชันให้ผู้เล่นอมตะชั่วครู่หลัง Dash
-    /// </summary>
-    private IEnumerator DashInvincibleCooldown(float duration)
-    {
-        if (playerHealth == null) yield break;
-
-        playerHealth.isInvincible = true;
-        yield return new WaitForSeconds(duration);
-        playerHealth.isInvincible = false;
-    }
-
-    /// <summary>
-    /// ฟังก์ชันโจมตีเป้าหมาย
-    /// </summary>
     private void DealDamage(Transform target)
     {
         if (target == null) return;
-
         Enemy enemy = target.GetComponent<Enemy>();
         if (enemy != null)
+        {
             enemy.TakeDamage(dashDamage);
-
-        Debug.Log("💥 Dash Punch ลดเลือด " + dashDamage);
+            Debug.Log("💥 Dash โดน! ดาเมจ: " + dashDamage);
+        }
     }
 }
