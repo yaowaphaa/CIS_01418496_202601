@@ -816,6 +816,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2912409010573160540, guid: 6e14ffc847de0e643a1b035b4cadb7bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7700911689035597659}
+    - target: {fileID: 2912409010573160540, guid: 6e14ffc847de0e643a1b035b4cadb7bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Retry
+      objectReference: {fileID: 0}
+    - target: {fileID: 3472258543148973803, guid: 6e14ffc847de0e643a1b035b4cadb7bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7700911689035597659}
+    - target: {fileID: 3472258543148973803, guid: 6e14ffc847de0e643a1b035b4cadb7bb, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Main
+      objectReference: {fileID: 0}
     - target: {fileID: 5142621355766383515, guid: 6e14ffc847de0e643a1b035b4cadb7bb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1031,6 +1047,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4669293886398844059, guid: dcfa0e36915ac064098d887a1eaef1c2, type: 3}
   m_PrefabInstance: {fileID: 6597320554211421362}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7700911689035597659 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2840560318101547758, guid: dcfa0e36915ac064098d887a1eaef1c2, type: 3}
+  m_PrefabInstance: {fileID: 6597320554211421362}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538d2fd0bdc43d44aa687cb3651f067d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
 --- !u!1001 &8379645275329678078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1083,6 +1110,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 7700911689035597658}
+    - target: {fileID: 1141553010036822114, guid: 62de86ed11ec858458cad45aa36afebe, type: 3}
+      propertyPath: enemyPrefab
+      value: 
+      objectReference: {fileID: 4726842676110856679, guid: 2a047e60d17e37f43865de6db39ae72a, type: 3}
     - target: {fileID: 2396091168208278165, guid: 62de86ed11ec858458cad45aa36afebe, type: 3}
       propertyPath: m_Name
       value: MapG
