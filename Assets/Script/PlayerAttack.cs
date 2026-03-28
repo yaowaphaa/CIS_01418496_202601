@@ -82,15 +82,15 @@ public class PlayerAttack : MonoBehaviour
     void UpdateCrosshair()
     {
         // แสดง crosshair เฉพาะสกิลที่ต้องมีเป้าหมาย (ไม่ใช่โล่)
-        if (currentSkill != -1 && currentTarget != null && currentSkill != 2 && crosshair != null)
-        {
-            crosshair.gameObject.SetActive(true);
-            crosshair.position = Input.mousePosition;
-        }
-        else if (crosshair != null)
-        {
-            crosshair.gameObject.SetActive(false);
-        }
+            if (currentSkill != -1 && currentSkill != 2 && crosshair != null)
+    {
+        crosshair.gameObject.SetActive(true);
+        crosshair.position = Input.mousePosition;
+    }
+    else if (crosshair != null)
+    {
+        crosshair.gameObject.SetActive(false);
+    }
     }
 
     // =========================
@@ -267,4 +267,6 @@ public class PlayerAttack : MonoBehaviour
                 rb.linearVelocity = dir * projectileSpeed;
         }
     }
+
 }
+
