@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
 
     [Header("Skill Cooldowns")]
     public float[] skillCooldowns;
-    private float[] lastUsedTimes;
+    public float[] lastUsedTimes;
 
     // =========================
     // SKILL SYSTEM
@@ -52,9 +52,14 @@ public class PlayerAttack : MonoBehaviour
 
         battleMana = 0;
         lastUsedTimes = new float[skillPrefabs.Length];
+        for (int i = 0; i < lastUsedTimes.Length; i++)
+        {
+            lastUsedTimes[i] = -100f; 
+        }
 
         currentIndicator = Instantiate(targetIndicatorPrefab);
         currentIndicator.SetActive(false);
+
     }
 
     void Update()
