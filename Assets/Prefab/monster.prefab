@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 2
   attackDamage: 1
+  attackCooldown: 1
 --- !u!114 &-462056444377750276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,3 +192,7 @@ MonoBehaviour:
   speed: 3
   rotationSpeed: 200
   obstacleCheckDistance: 1
+  detectionRange: 8
+  attackRange: 1.5
+  viewAngle: 120
+  anim: {fileID: 0}

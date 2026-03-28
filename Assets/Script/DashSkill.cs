@@ -5,7 +5,7 @@ using System.Collections;
 public class DashSkill : MonoBehaviour
 {
     [Header("Dash Settings")]
-    public float dashSpeed = 25f;
+    public float dashSpeed = 15f;
     public float dashStopDistance = 1.5f;
     public int dashDamage = 30;
     public GameObject dashEffectPrefab;
@@ -67,6 +67,7 @@ public class DashSkill : MonoBehaviour
 
         // 2️⃣ หลัง Dash → ผู้เล่นยังอมตะ, มอนที่ชนตายทันที
         float timer = 0f;
+        
         Debug.Log("🟢 หลัง Dash → ช่วงอมตะสั้นๆ มอนโดนตาย, ผู้เล่นไม่โดนดาเมจ");
 
         while (timer < postDashInvincibleDuration)
@@ -86,6 +87,7 @@ public class DashSkill : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+        
 
         // 3️⃣ หลังช่วงสั้นๆ → กลับเป็นปกติ
         if (playerHealth != null)

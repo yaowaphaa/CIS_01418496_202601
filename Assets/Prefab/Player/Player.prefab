@@ -446,13 +446,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   battleMana: 0
-  manaCosts: 05000000010000000200000003000000
+  manaCosts: 04000000010000000200000003000000
   totalCoins: 0
   skillCooldowns:
-  - 5
   - 4
-  - 3
   - 1
+  - 2
+  - 3
   crosshair: {fileID: 0}
   skillPrefabs:
   - {fileID: 3274585299066543766, guid: f34d3da3d3610bb40ae88e49a64c0b13, type: 3}
