@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
+
 public class BossHealth : MonoBehaviour
 {
     public float maxHealth = 1000f;
@@ -17,6 +18,8 @@ public class BossHealth : MonoBehaviour
     private bool hasEscaped = false;
     public SmartPortal portalScript;
     public float distanceFromCam = 60f;
+    public float triggerPercent = 0.75f;
+    public System.Action OnTriggerHP;
 
     void Start()
     {
@@ -25,7 +28,6 @@ public class BossHealth : MonoBehaviour
         healthSlider.maxValue = maxHealth;
         healthSlider.value = maxHealth;
         UpdateUI();
-        if (portalScript != null) portalScript.gameObject.SetActive(false);
     }
 
     void Update()
@@ -37,55 +39,65 @@ public class BossHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (currentHealth <= 0) return;
-        currentHealth -= damage;
+
+        currentHealth -= damage; // ✅ ต้องมีบรรทัดนี้
+
         UpdateUI();
+
         if (anim != null) anim.SetTrigger("GetHit");
-        if (currentHealth <= maxHealth * 0.75f && !hasEscaped)
+
+        if (currentHealth <= maxHealth * triggerPercent && !hasEscaped)
         {
             hasEscaped = true;
+
+            OnTriggerHP?.Invoke(); // ✅ ยิง event ไปให้ portal
+
             StartCoroutine(EscapeSequence());
         }
     }
 
     IEnumerator EscapeSequence()
     {
-        if (portalScript != null)
-        {
-            Transform cam = Camera.main.transform;
-            Vector3 spawnPos = cam.position + (cam.forward * distanceFromCam);
-            spawnPos.y = transform.position.y;
-            portalScript.ActivatePortal(spawnPos);
-        }
-        yield return new WaitForSeconds(1.5f); 
-        if (portalScript != null)
-        {
+        yield return new WaitForSeconds(1.5f);
 
-            Vector3 dirToPortal = (portalScript.transform.position - transform.position).normalized;
-            dirToPortal.y = 0;
-            Quaternion targetRotation = Quaternion.LookRotation(dirToPortal);
-            
-            float time = 0;
-            while (time < 0.5f) 
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, time * rotationSpeed);
-                time += Time.deltaTime;
-                yield return null;
-            }
-            transform.rotation = targetRotation;
-        }
         if (anim != null) 
         { 
             anim.SetTrigger("JumpAway");
-            yield return new WaitForSeconds(0.4f); // จังหวะย่อตัว
+            
+            // หมุนตัวบอส
+            yield return StartCoroutine(RotateBackwards());
 
-            if (portalScript != null)
-            {
-                JumpToPortal(portalScript.transform.position); 
-            }
+            // รออีกนิดก่อนกระโดด
+            yield return new WaitForSeconds(0.1f);
+
+            Jump(); // หรือ JumpToPortal ถ้ามี target อื่น
+
             yield return new WaitForSeconds(0.6f);
+
             if(BossModel != null) BossModel.SetActive(false); 
-            Debug.Log("บอสหนีไปแล้ว ประตูยังเปิดอยู่ให้ผู้เล่นตามไป");
+
+            Debug.Log("บอสหนีไปแล้ว");
         }
+    }
+
+    // Coroutine สำหรับหมุนตัวบอส 180 องศา
+    IEnumerator RotateBackwards()
+    {
+        float targetAngle = transform.eulerAngles.y + 180f;
+        float currentAngle = transform.eulerAngles.y;
+        float elapsed = 0f;
+        float duration = 0.5f; // กำหนดเวลาหมุน (0.5 วินาที)
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float newY = Mathf.LerpAngle(currentAngle, targetAngle, elapsed / duration);
+            transform.rotation = Quaternion.Euler(0f, newY, 0f);
+            yield return null;
+        }
+
+        // ตั้งค่าให้แน่นอน
+        transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
     }
 
     public void Jump()

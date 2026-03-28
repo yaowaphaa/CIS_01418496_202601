@@ -4,11 +4,12 @@ using System.Collections;
 
 public class PreBossPortal : MonoBehaviour
 {
-    [Header("--- Settings ---")]
+    [Header("--- Follow Player ---")]
+    public Transform player;
+    public float distance = 15f; // ระยะหน้าผู้เล่น
+
+    [Header("--- Spawn Timing ---")]
     public float timeToWait = 10f;
-    public float distanceInFront = 15f;
-    public float moveDuration = 3f;
-    public float moveSpeed = 5f;
     public float scaleSpeed = 5f;
 
     [Header("--- References ---")]
@@ -16,72 +17,66 @@ public class PreBossPortal : MonoBehaviour
     public string nextScene;
 
     private Vector3 savedTargetScale;
-    private Quaternion savedRotation;
     private bool isSpawned = false;
+    private float fixedZ;
 
-    void Awake() // เก็บค่าให้ไวที่สุดก่อนโดน Reset
+    void Awake()
     {
         if (door != null)
         {
-            // 1. จำค่าที่ปั้นไว้ใน Editor จริงๆ
             savedTargetScale = door.transform.localScale;
-            savedRotation = door.transform.rotation;
-
-            // ปิดและซ่อน
             door.transform.localScale = Vector3.zero;
-            door.SetActive(false);
+            fixedZ = door.transform.position.z;
         }
     }
 
     void Start()
     {
-        StartCoroutine(SpawnPortalRoutine());
+        StartCoroutine(SpawnRoutine());
     }
 
-    IEnumerator SpawnPortalRoutine()
+    void Update()
+    {
+        if (door != null && player != null && !isSpawned)
+        {
+            door.transform.position = new Vector3(
+                player.position.x + distance,
+                door.transform.position.y,
+                fixedZ
+            );
+        }
+    }
+
+   IEnumerator SpawnRoutine()
     {
         yield return new WaitForSeconds(timeToWait);
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        
-        if (player != null && door != null)
+        float t = 0f;
+        float duration = 0.8f;
+
+        Quaternion startRot = door.transform.rotation;
+
+        while (t < duration)
         {
-            // 2. คำนวณจุดเกิด "แค่ครั้งเดียว" ตอนเริ่ม (ดักหน้าผู้เล่น ณ วินาทีนั้น)
-            Vector3 spawnPos = player.transform.position + (player.transform.forward * distanceInFront);
-            
-            // ล็อกแกน Y ให้เท่ากับระดับพื้นเดิมหรือระดับบอส (เลือกเอาตามต้องการ)
-            // ในที่นี้ล็อกตามจุดที่คำนวณได้ครั้งแรก
-            float lockY = spawnPos.y;
-            float lockZ = spawnPos.z;
-            float startX = spawnPos.x;
+            t += Time.deltaTime;
+            float p = t / duration;
+            float scale = Mathf.Sin(p * Mathf.PI * 0.5f);
+            door.transform.localScale = savedTargetScale * scale;
+            float rotY = Mathf.Lerp(0f, 360f, p);
+            door.transform.rotation = startRot * Quaternion.Euler(0f, rotY, 0f);
 
-            // เซตตำแหน่งและองศาให้เป๊ะตาม Editor
-            door.transform.position = spawnPos;
-            door.transform.rotation = savedRotation; 
-
-            door.SetActive(true);
-            isSpawned = true;
-
-            float elapsed = 0;
-            while (elapsed < moveDuration)
-            {
-                elapsed += Time.deltaTime;
-                
-                // 3. เลื่อนเฉพาะแกน X จากจุดเริ่มต้นที่คำนวณไว้
-                float currentX = startX + (elapsed * moveSpeed);
-                
-                // ใช้การสร้างพิกัดใหม่ทับลงไปที่ตัวประตูโดยตรง
-                door.transform.position = new Vector3(currentX, lockY, lockZ);
-
-                // 4. ค่อยๆ ขยายร่าง
-                door.transform.localScale = Vector3.MoveTowards(door.transform.localScale, savedTargetScale, scaleSpeed * Time.deltaTime);
-
-                yield return null;
-            }
-
-            // ปิดงาน: บังคับค่าสุดท้ายให้เป๊ะ
-            door.transform.localScale = savedTargetScale;
+            yield return null;
         }
+
+        // ⭐ เด้งตอนจบ
+        door.transform.localScale = savedTargetScale * 1.4f;
+        yield return new WaitForSeconds(0.05f);
+        door.transform.localScale = savedTargetScale;
+
+        // ⭐ กลับท่าเดิมเป๊ะ
+        door.transform.rotation = startRot;
+
+        isSpawned = true;
     }
 
     private void OnTriggerEnter(Collider other)

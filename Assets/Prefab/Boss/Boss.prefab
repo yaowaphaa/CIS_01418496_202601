@@ -724,6 +724,7 @@ MonoBehaviour:
   jumpForce: 15
   portalScript: {fileID: 0}
   distanceFromCam: 60
+  triggerPercent: 0.75
 --- !u!114 &5841969062412661161
 MonoBehaviour:
   m_ObjectHideFlags: 0

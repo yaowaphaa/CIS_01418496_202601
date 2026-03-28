@@ -130,17 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &187529096 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6132541702812625838, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-  m_PrefabInstance: {fileID: 1482535683}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b4c84376631f654a9d5f2b02db24c7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SmartPortal
 --- !u!114 &246940010 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6151244880447644090, guid: 6e14ffc847de0e643a1b035b4cadb7bb, type: 3}
@@ -457,63 +446,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6762044199312285391, guid: fc7aa6d92272f734e992a21d9635fbc8, type: 3}
   m_PrefabInstance: {fileID: 3918221455866776662}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1482535683
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 207.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.49756408
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.49756408
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.50242424
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.5024241
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 175977022578211433, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -90.557
-      objectReference: {fileID: 0}
-    - target: {fileID: 8420438114945970502, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
-      propertyPath: m_Name
-      value: Door
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3f89e55fe0c3dfb45a5ba324e68728ee, type: 3}
+--- !u!114 &1453068927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7408970328706970383, guid: fc7aa6d92272f734e992a21d9635fbc8, type: 3}
+  m_PrefabInstance: {fileID: 3918221455866776662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d50159d2fd50c545b76d2d0825d30b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossHealth
 --- !u!1001 &1569799858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -628,6 +571,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d23496324c20c7d4681191f00e50172e, type: 3}
+--- !u!114 &1934858526 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 229684332680341324, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+  m_PrefabInstance: {fileID: 457114206136960714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4c84376631f654a9d5f2b02db24c7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SmartPortal
 --- !u!114 &1936087316 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8986589567954449692, guid: 6e14ffc847de0e643a1b035b4cadb7bb, type: 3}
@@ -861,6 +815,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!1001 &457114206136960714
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 229684332680341324, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 1453068927}
+    - target: {fileID: 229684332680341324, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 7700911689035597658}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 210.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.1976395
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.49756408
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.49756408
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.50242424
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.5024241
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 701229455606002130, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -90.557
+      objectReference: {fileID: 0}
+    - target: {fileID: 1961418565963910369, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
+      propertyPath: m_Name
+      value: MagicDoorBoss
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 095ec653af33c094ba99baca0f89d220, type: 3}
 --- !u!114 &2906804777529470208 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 954340819428811390, guid: dcfa0e36915ac064098d887a1eaef1c2, type: 3}
@@ -959,7 +978,7 @@ PrefabInstance:
     - target: {fileID: 7408970328706970383, guid: fc7aa6d92272f734e992a21d9635fbc8, type: 3}
       propertyPath: portalScript
       value: 
-      objectReference: {fileID: 187529096}
+      objectReference: {fileID: 1934858526}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1136,5 +1155,5 @@ SceneRoots:
   - {fileID: 1665370937}
   - {fileID: 372006507}
   - {fileID: 8379645275329678078}
-  - {fileID: 1482535683}
   - {fileID: 1986008189}
+  - {fileID: 457114206136960714}
