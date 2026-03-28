@@ -56,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
     }
     void UpdateCrosshair()
     {
-<<<<<<< HEAD
+
         // แสดง crosshair เฉพาะสกิลที่ต้องมีเป้าหมาย (ไม่ใช่โล่)
             if (currentSkill != -1 && currentSkill != 2 && crosshair != null)
     {
@@ -67,20 +67,7 @@ public class PlayerAttack : MonoBehaviour
     {
         crosshair.gameObject.SetActive(false);
     }
-=======
-         if (currentSkill != -1 && crosshair != null)
-        {
-            // แสดงและเคลื่อนที่ crosshair ตามเมาส์
-            crosshair.gameObject.SetActive(true);
-            crosshair.position = Input.mousePosition;
-        }
-        else if (crosshair != null)
-        {
-            // ซ่อน crosshair ถ้ายังไม่ได้เลือกสกิล
-            crosshair.gameObject.SetActive(false);
-        }
-        
->>>>>>> b9694a76ec730efc3c0c050f61d21d0db6dee760
+
     }
 
     // =========================
