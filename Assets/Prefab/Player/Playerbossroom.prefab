@@ -1684,6 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   battleMana: 0
   manaCosts: 0100000003000000
+  totalCoins: 0
   skillCooldowns:
   - 2
   - 5
@@ -1693,6 +1694,8 @@ MonoBehaviour:
   - {fileID: 8226049483450571503, guid: 9c386545e2f1cb6409d21cad345d3d5a, type: 3}
   firePoint: {fileID: 1683910275698471487}
   projectileSpeed: 20
+  dashSkill: {fileID: 0}
+  shieldSkill: {fileID: 0}
   spreadCount: 5
   spreadAngle: 30
   targetIndicatorPrefab: {fileID: 5669749495242813167, guid: 60f558cf29828944bb3542707f22c905, type: 3}
@@ -1752,11 +1755,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
   health: 3
   maxHealth: 3
+  isInvincible: 0
   hearts:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   gameOverPanel: {fileID: 0}
+  damageCooldown: 0.2
 --- !u!114 &954340819428811390
 MonoBehaviour:
   m_ObjectHideFlags: 0

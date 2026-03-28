@@ -49,23 +49,23 @@ public class BossHealth : MonoBehaviour
 
     IEnumerator EscapeSequence()
     {
-        yield return new WaitForSeconds(0.5f); 
         if (portalScript != null)
         {
             Transform cam = Camera.main.transform;
             Vector3 spawnPos = cam.position + (cam.forward * distanceFromCam);
-            Vector3 dirToBoss = (transform.position - spawnPos).normalized;
-            portalScript.ActivatePortal(spawnPos, Quaternion.LookRotation(dirToBoss) * Quaternion.Euler(0, -90, 0));
+            spawnPos.y = transform.position.y;
+            portalScript.ActivatePortal(spawnPos);
         }
-        yield return new WaitForSeconds(1.0f); 
+        yield return new WaitForSeconds(1.5f); 
         if (portalScript != null)
         {
+
             Vector3 dirToPortal = (portalScript.transform.position - transform.position).normalized;
-            dirToPortal.y = 0; // ล็อกแกน Y ไว้ไม่ให้บอสเงยหน้า
+            dirToPortal.y = 0;
             Quaternion targetRotation = Quaternion.LookRotation(dirToPortal);
             
             float time = 0;
-            while (time < 1f)
+            while (time < 0.5f) 
             {
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, time * rotationSpeed);
                 time += Time.deltaTime;
@@ -73,16 +73,18 @@ public class BossHealth : MonoBehaviour
             }
             transform.rotation = targetRotation;
         }
-
         if (anim != null) 
         { 
             anim.SetTrigger("JumpAway");
-            yield return new WaitForSeconds(0.4f);
-            Jump(); 
-            yield return new WaitForSeconds(0.7f);
+            yield return new WaitForSeconds(0.4f); // จังหวะย่อตัว
+
+            if (portalScript != null)
+            {
+                JumpToPortal(portalScript.transform.position); 
+            }
+            yield return new WaitForSeconds(0.6f);
             if(BossModel != null) BossModel.SetActive(false); 
-            yield return new WaitForSeconds(2.0f);
-            if(portalScript != null) portalScript.gameObject.SetActive(false);
+            Debug.Log("บอสหนีไปแล้ว ประตูยังเปิดอยู่ให้ผู้เล่นตามไป");
         }
     }
 
@@ -90,9 +92,20 @@ public class BossHealth : MonoBehaviour
     {
         if (rb == null) return;
         rb.linearVelocity = Vector3.zero;
-        Vector3 jumpDirection = (Vector3.up * jumpForce) + (transform.forward * (jumpForce * 2.5f));
+        Vector3 jumpDirection = (Vector3.up * jumpForce) + (transform.forward * (jumpForce * 5f));
         rb.AddForce(jumpDirection, ForceMode.Impulse);
     }
 
-    void UpdateUI() { healthText.text = Mathf.Round(currentHealth) + " / " + maxHealth; }
+    void UpdateUI() 
+    { 
+        healthText.text = Mathf.Round(currentHealth) + " / " + maxHealth; 
+    }
+    public void JumpToPortal(Vector3 targetPos)
+    {
+        if (rb == null) return;
+        rb.linearVelocity = Vector3.zero; 
+        Vector3 direction = (targetPos - transform.position).normalized;
+        Vector3 jumpDirection = (Vector3.up * jumpForce) + (direction * (jumpForce * 2.5f));
+        rb.AddForce(jumpDirection, ForceMode.Impulse);
+    }
 }

@@ -72,14 +72,14 @@ public class PlayerBossMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
 {
-    // เช็คว่าชน "Ground" หรือไม่
+
     if (collision.gameObject.CompareTag("Ground"))
     {
         isGrounded = true;
-        // ถ้าเพิ่งถึงพื้นครั้งแรก
+  
         if (!isLanded)
         {
-            isLanded = true; // บรรทัดนี้จะส่งสัญญาณให้สคริปต์กล้องเริ่มทำงานต่อ
+            isLanded = true; 
             
             if (childAnim != null)
             {
