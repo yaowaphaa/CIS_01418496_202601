@@ -3,80 +3,65 @@ using UnityEngine;
 public class RocketTank : MonoBehaviour
 {
     [Header("Detection")]
-    public float detectRange = 10f;
+    public float detectRange = 12f;
     public string playerTag = "Player";
 
     [Header("Rocket Physics")]
-    public float launchSpeed = 20f; // ความเร็วตอนพุ่ง
-    public float rotateSpeed = 15f; // ความเร็วในการหันก้นไปหาผู้เล่น (ก่อนพุ่ง)
+    public float launchSpeed = 35f;  // เพิ่มความเร็วให้สะใจ
+    public Vector3 rocketAxis = Vector3.up; // ปกติถังแก๊สจะพุ่งตามแนวตั้ง (Y)
 
-    private Transform playerTransform;
+    private Transform player;
     private bool isLaunched = false;
-    private Vector3 launchDirection;
+    private Rigidbody rb;
 
     void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
-        if (player != null) playerTransform = player.transform;
+        rb = GetComponent<Rigidbody>();
+        GameObject p = GameObject.FindGameObjectWithTag(playerTag);
+        if (p != null) player = p.transform;
     }
 
     void Update()
     {
-        if (playerTransform == null || isLaunched) return;
+        if (player == null || isLaunched) return;
 
-        float distance = Vector3.Distance(transform.position, playerTransform.position);
-
-        // 1. ตรวจจับระยะ
-        if (distance <= detectRange)
+        if (Vector3.Distance(transform.position, player.position) <= detectRange)
         {
-            StartCoroutine(LaunchSequence());
+            LaunchNow();
         }
     }
 
-    System.Collections.IEnumerator LaunchSequence()
+    void LaunchNow()
     {
         isLaunched = true;
 
-        // 2. คำนวณทิศทาง: หาทางที่จะให้ "ท้าย (-Y)" ชี้ไปหาผู้เล่น
-        // นั่นแปลว่าเราต้องให้ "หัว (+Y)" ชี้ "หนี" จากผู้เล่น
-        Vector3 dirAwayFromPlayer = (transform.position - playerTransform.position).normalized;
+        // 1. หันหัวไปหาผู้เล่น "ทันที" (ไม่รอหมุน)
+        Vector3 dir = (player.position - transform.position).normalized;
 
-        // ล็อคเป้าหมายสุดท้ายที่จะพุ่งไป (ทิศที่ก้นชี้ไปหาผู้เล่นตอนนั้น)
-        launchDirection = -dirAwayFromPlayer;
+        // ใช้ LookRotation เพื่อให้แกน 'rocketAxis' ชี้ไปหาผู้เล่น
+        transform.rotation = Quaternion.FromToRotation(rocketAxis, dir) * transform.rotation;
 
-        // 3. หมุนตัวถังให้หัว (แกน Y) หันหนีผู้เล่น (เพื่อให้ท้ายพุ่งใส่)
-        float elapsed = 0;
-        Quaternion targetRotation = Quaternion.LookRotation(dirAwayFromPlayer, Vector3.up);
-        // เนื่องจากปกติ LookRotation ใช้แกน Z เราต้องปรับให้ใช้แกน Y แทน
-        targetRotation *= Quaternion.Euler(90, 0, 0);
-
-        while (elapsed < 0.5f) // ใช้เวลา 0.5 วินาทีในการหันก้นมาหา
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, elapsed / 0.5f);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        // 4. พุ่ง! (ใช้ Rigidbody เพื่อให้มีแรงกระแทก)
-        Rigidbody rb = GetComponent<Rigidbody>();
+        // 2. ให้ Rigidbody ทำงานทันที
         if (rb != null)
         {
             rb.isKinematic = false;
-            rb.useGravity = false; // พุ่งแบบจรวดไม่สนโลก
-            rb.AddForce(launchDirection * launchSpeed, ForceMode.Impulse);
+            rb.useGravity = false;
+            // ใส่แรงถีบมหาศาลแบบ Impulse (พุ่งพรวดเดียว!)
+            rb.AddForce(dir * launchSpeed, ForceMode.VelocityChange);
         }
+
+        // 3. ทำลายตัวเองถ้าพลาดเป้า (กันรกฉาก)
+        Destroy(gameObject, 3f);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag(playerTag))
         {
-            // ลดแต้ม hpoint
-            PlayerStats stats = collision.gameObject.GetComponent<PlayerStats>();
-            if (stats != null) stats.DecreaseHPoint(1);
+            HealthSystem health = collision.gameObject.GetComponent<HealthSystem>();
+            if (health != null) health.TakeDamage(1);
 
-            // ใส่เอฟเฟกต์ระเบิดตรงนี้ได้
-            Debug.Log("ถังแก๊สอัดหน้าผู้เล่น!");
+            Debug.Log("🚀 ตู้มมม!");
             Destroy(gameObject);
         }
     }
