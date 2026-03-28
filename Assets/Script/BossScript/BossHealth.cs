@@ -39,23 +39,16 @@ public class BossHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         if (currentHealth <= 0) return;
-
         currentHealth -= damage; // ✅ ต้องมีบรรทัดนี้
-
         UpdateUI();
-
         if (anim != null) anim.SetTrigger("GetHit");
-
         if (currentHealth <= maxHealth * triggerPercent && !hasEscaped)
         {
             hasEscaped = true;
-
             OnTriggerHP?.Invoke(); // ✅ ยิง event ไปให้ portal
-
             StartCoroutine(EscapeSequence());
         }
     }
-
     IEnumerator EscapeSequence()
     {
         yield return new WaitForSeconds(1.5f);
@@ -63,30 +56,20 @@ public class BossHealth : MonoBehaviour
         if (anim != null) 
         { 
             anim.SetTrigger("JumpAway");
-            
-            // หมุนตัวบอส
             yield return StartCoroutine(RotateBackwards());
-
-            // รออีกนิดก่อนกระโดด
             yield return new WaitForSeconds(0.1f);
-
-            Jump(); // หรือ JumpToPortal ถ้ามี target อื่น
-
+            Jump(); 
             yield return new WaitForSeconds(0.6f);
-
             if(BossModel != null) BossModel.SetActive(false); 
-
             Debug.Log("บอสหนีไปแล้ว");
         }
     }
-
-    // Coroutine สำหรับหมุนตัวบอส 180 องศา
     IEnumerator RotateBackwards()
     {
         float targetAngle = transform.eulerAngles.y + 180f;
         float currentAngle = transform.eulerAngles.y;
         float elapsed = 0f;
-        float duration = 0.5f; // กำหนดเวลาหมุน (0.5 วินาที)
+        float duration = 0.5f; 
 
         while (elapsed < duration)
         {
@@ -96,7 +79,6 @@ public class BossHealth : MonoBehaviour
             yield return null;
         }
 
-        // ตั้งค่าให้แน่นอน
         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
     }
 
