@@ -267,6 +267,4 @@ public class PlayerAttack : MonoBehaviour
                 rb.linearVelocity = dir * projectileSpeed;
         }
     }
-
 }
-
