@@ -6,7 +6,8 @@ using System.Collections;
 public class BossHealth : MonoBehaviour
 {
     // เพิ่มตัวแปร Static เพื่อเก็บค่าข้ามซีน
-    public static float savedHealth = -1f; 
+    public static float savedHealth = -1f;
+    public static float savedHealthCheckpoint = -1f; 
     public GameObject victoryScreen;
     public float maxHealth = 1000f;
     public float currentHealth;
@@ -21,7 +22,6 @@ public class BossHealth : MonoBehaviour
     public float jumpForce = 22f; 
     private Rigidbody rb;
     private bool hasEscaped = false;
-    
     public float triggerPercent = 0.75f;
     public System.Action OnTriggerHP;
 
@@ -35,6 +35,7 @@ public class BossHealth : MonoBehaviour
         } else {
             currentHealth = savedHealth;
         }
+        savedHealthCheckpoint = currentHealth;
 
         if (healthSlider != null) {
             healthSlider.maxValue = maxHealth;
@@ -135,6 +136,7 @@ public class BossHealth : MonoBehaviour
         if (isDead) return;
         isDead = true;
         savedHealth = -1f;
+        savedHealthCheckpoint = -1f;
         if (rb != null) {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;

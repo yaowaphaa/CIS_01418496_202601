@@ -69,6 +69,7 @@ public class HealthSystem : MonoBehaviour
     public void Retry()
     {
         Time.timeScale = 1f;
+        BossHealth.savedHealth = BossHealth.savedHealthCheckpoint;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

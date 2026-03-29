@@ -218,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 885811645}
     - target: {fileID: 7593250291759869858, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
       propertyPath: forwardDistance
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7757992565876156216, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
       propertyPath: horizontalSpeed

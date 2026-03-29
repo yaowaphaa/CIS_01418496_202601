@@ -620,7 +620,7 @@ PrefabInstance:
       objectReference: {fileID: 155277761}
     - target: {fileID: 8725318514453030312, guid: fa0f44d9c3f0d334ba399e8aa6427634, type: 3}
       propertyPath: timeToWait
-      value: 600
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -92,6 +92,11 @@ public class SmartPortal : MonoBehaviour
     {
         if (isSpawned && other.CompareTag("Player"))
         {
+            string scene = SceneManager.GetActiveScene().name;
+            if (scene == "BossScene")  GameProgress.ClearBoss(0);
+            else if (scene == "BossScene1") GameProgress.ClearBoss(1);
+            else if (scene == "BossScene2") GameProgress.ClearBoss(2);
+
             SceneManager.LoadScene(nextScene);
         }
     }
