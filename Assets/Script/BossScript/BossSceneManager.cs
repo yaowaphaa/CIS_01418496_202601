@@ -9,7 +9,6 @@ public class BossSceneController : MonoBehaviour
     public CinemachineCamera bossCam;   // กล้องที่บอส
     public PlayerBossMovement player;   // ลากตัว Player มาใส่ช่องนี้
     public GameObject gameUI;
-    public GameObject MapDes;
 
     IEnumerator Start()
     {
@@ -17,10 +16,7 @@ public class BossSceneController : MonoBehaviour
         {
             gameUI.SetActive(false);
         }
-        if (MapDes != null)
-        {
-            MapDes.SetActive(false);
-        }
+
         playerCam.Priority = 20;
         bossCam.Priority = 10;
         if (player.childAnim != null) player.childAnim.SetBool("IsFallingIdle", true);

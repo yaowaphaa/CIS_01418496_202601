@@ -9,7 +9,7 @@ public class CoinSpawner : MonoBehaviour
     public int coinsPerRow = 5;
     public float spacing = 1.5f;
     public float spawnOffset = 10f;
-
+    public float rowX;
     private float nextSpawnX;
 
     void Start()
@@ -34,7 +34,7 @@ public class CoinSpawner : MonoBehaviour
         {
             Vector3 spawnPos = new Vector3(
                 nextSpawnX + i * spacing,
-                1f,
+                rowX,
                 randomZ
             );
 
