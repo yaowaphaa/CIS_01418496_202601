@@ -4,24 +4,24 @@ using System.Collections;
 public class PlayerCollisionHandler : MonoBehaviour
 {
     [Header("Settings")]
-    public float invulnerableDuration = 1f;
-    public int manaLossOnHit = 10;
-    public string obstacleLayerName = "Obstacle"; // ชื่อ Layer ของอุปสรรค
+    public float invulnerableDuration = 1.5f; // เวลาอมตะ
+    public int manaLossOnHit = 10;           // จำนวนที่ลด
+    public string obstacleLayerName = "Obstacle";
 
     private bool isInvulnerable = false;
-    private PlayerAttack playerAttack; // ไว้อ้างอิงไปที่ Script เดิม
-    private Renderer[] renderers;      // เก็บ Renderer ทั้งหมด (เผื่อตัวละครมีหลายส่วน)
+    private PlayerAttack playerAttack;
+    private Renderer[] renderers;
 
     void Start()
     {
-        // ดึง Script PlayerAttack มาเก็บไว้เพื่อลด Mana
         playerAttack = GetComponent<PlayerAttack>();
-        // ดึง Renderer ทั้งหมดในตัวละครมาเตรียมทำตัวกระพริบ
+        // ดึง Renderer ทั้งหมดในโมเดล (รวมถึงลูกๆ) เพื่อทำ Effect กระพริบ
         renderers = GetComponentsInChildren<Renderer>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+        // ตรวจสอบ Tag และสถานะอมตะ
         if (collision.gameObject.CompareTag("Obstacle") && !isInvulnerable)
         {
             StartCoroutine(HandleObstacleHit());
@@ -32,42 +32,47 @@ public class PlayerCollisionHandler : MonoBehaviour
     {
         isInvulnerable = true;
 
-        // 1. ลด Mana ผ่าน Script PlayerAttack
+        // ✅ เรียกฟังก์ชันลด Mana ที่เราสร้างไว้ใน PlayerAttack
         if (playerAttack != null)
         {
-            playerAttack.battleMana -= manaLossOnHit;
-            if (playerAttack.battleMana < 0) playerAttack.battleMana = 0;
-            Debug.Log("💥 ชน! Mana เหลือ: " + playerAttack.battleMana);
+            playerAttack.TakeDamage(manaLossOnHit);
         }
 
-        // 2. ตั้งค่าให้ทะลุ Layer (Player ทะลุกับ Obstacle)
+        // --- ระบบทะลุสิ่งกีดขวางชั่วคราว ---
         int playerLayer = gameObject.layer;
         int obstacleLayer = LayerMask.NameToLayer(obstacleLayerName);
-        Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, true);
 
-        // 3. ตัวกระพริบสีแดง (วนลูปสลับสี)
+        if (obstacleLayer != -1)
+            Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, true);
+
+        // --- Effect ตัวกระพริบแดง-ขาว ---
         float elapsed = 0;
         while (elapsed < invulnerableDuration)
         {
             SetColor(Color.red);
             yield return new WaitForSeconds(0.1f);
-            SetColor(Color.white); // หรือสีเดิมที่คุณต้องการ
+            SetColor(Color.white);
             yield return new WaitForSeconds(0.1f);
             elapsed += 0.2f;
         }
 
-        // 4. กลับสู่สภาวะปกติ
+        // --- คืนค่าสถานะปกติ ---
         SetColor(Color.white);
-        Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, false);
+        if (obstacleLayer != -1)
+            Physics.IgnoreLayerCollision(playerLayer, obstacleLayer, false);
+
         isInvulnerable = false;
     }
 
-    // ฟังก์ชันช่วยเปลี่ยนสีทุกส่วนของร่างกาย
     void SetColor(Color color)
     {
         foreach (var r in renderers)
         {
-            if (r != null) r.material.color = color;
+            if (r != null)
+            {
+                // เปลี่ยนสี Material (รองรับ Shader มาตรฐาน)
+                r.material.color = color;
+            }
         }
     }
 }

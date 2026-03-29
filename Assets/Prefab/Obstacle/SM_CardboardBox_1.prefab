@@ -57,6 +57,10 @@ PrefabInstance:
       value: SM_CardboardBox_1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: bfa6cfaffa7ee8945bc71db3f251e849, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bfa6cfaffa7ee8945bc71db3f251e849, type: 3}
       propertyPath: m_TagString
       value: Obstacle
       objectReference: {fileID: 0}

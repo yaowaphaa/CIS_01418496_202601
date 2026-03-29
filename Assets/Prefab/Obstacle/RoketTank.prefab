@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6741980326627348152}
   - component: {fileID: 3815518363370081525}
   - component: {fileID: 3851432552143417304}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.052
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 5238138419475165506}
   - component: {fileID: 7503924984477137759}
   - component: {fileID: 6114994260834441113}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.053
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 7018161225515777497}
   - component: {fileID: 1901670391037961861}
   - component: {fileID: 7257966261596104679}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.054
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -281,7 +281,7 @@ GameObject:
   - component: {fileID: 8824002005215956335}
   - component: {fileID: 2178250505813792270}
   - component: {fileID: 2145513807373796242}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.050
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,7 +371,7 @@ GameObject:
   - component: {fileID: 7148688095407613420}
   - component: {fileID: 7388597577926031416}
   - component: {fileID: 1047042886381136140}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.055
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 5979875086564031467}
   - component: {fileID: 4892789891729331031}
   - component: {fileID: 8443073540897110987}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.051
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,7 +552,7 @@ GameObject:
   - component: {fileID: 573299143095104099}
   - component: {fileID: 1219023155985070819}
   - component: {fileID: 2884115486483872648}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoketTank
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ MonoBehaviour:
   detectRange: 10
   playerTag: Player
   launchSpeed: 20
-  rotateSpeed: 0.5
+  rocketAxis: {x: 0, y: 1, z: 0}
 --- !u!54 &1219023155985070819
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
     public GameObject[] skillPrefabs;
     public Transform firePoint;
     public float projectileSpeed = 15f;
-    
+
     [Header("Dash Skill")]
     public DashSkill dashSkill;
 
@@ -54,7 +54,7 @@ public class PlayerAttack : MonoBehaviour
         lastUsedTimes = new float[skillPrefabs.Length];
         for (int i = 0; i < lastUsedTimes.Length; i++)
         {
-            lastUsedTimes[i] = -100f; 
+            lastUsedTimes[i] = -100f;
         }
 
         currentIndicator = Instantiate(targetIndicatorPrefab);
@@ -87,15 +87,15 @@ public class PlayerAttack : MonoBehaviour
     void UpdateCrosshair()
     {
         // แสดง crosshair เฉพาะสกิลที่ต้องมีเป้าหมาย (ไม่ใช่โล่)
-            if (currentSkill != -1 && currentSkill != 2 && crosshair != null)
-    {
-        crosshair.gameObject.SetActive(true);
-        crosshair.position = Input.mousePosition;
-    }
-    else if (crosshair != null)
-    {
-        crosshair.gameObject.SetActive(false);
-    }
+        if (currentSkill != -1 && currentSkill != 2 && crosshair != null)
+        {
+            crosshair.gameObject.SetActive(true);
+            crosshair.position = Input.mousePosition;
+        }
+        else if (crosshair != null)
+        {
+            crosshair.gameObject.SetActive(false);
+        }
     }
 
     // =========================
@@ -272,4 +272,21 @@ public class PlayerAttack : MonoBehaviour
                 rb.linearVelocity = dir * projectileSpeed;
         }
     }
+
+    // =========================
+    // ADD THIS TO PlayerAttack.cs
+    // =========================
+    public void TakeDamage(int damage)
+    {
+        // ลดค่า battleMana (เหรียญในด่าน)
+        battleMana -= damage;
+
+        // ป้องกันไม่ให้ค่าติดลบ
+        if (battleMana < 0) battleMana = 0;
+
+        Debug.Log("💥 Player Hit! Mana Loss: " + damage + " | Remaining: " + battleMana);
+
+        // (Option) ถ้ามี UI อัปเดต Mana ให้ใส่บรรทัดเรียก Update UI ตรงนี้ได้เลย
+    }
+
 }

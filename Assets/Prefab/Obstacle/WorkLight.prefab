@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5631828032452955966}
   - component: {fileID: 7571667191039635020}
   - component: {fileID: 1400608681150255232}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.035
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 2915145284506658755}
   - component: {fileID: 5346317554386787099}
   - component: {fileID: 5780617182645901256}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube.041
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 3218932347539295566}
   - component: {fileID: 3292312660569542592}
   - component: {fileID: 3248029176258255810}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.023
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 2791563225534968646}
   - component: {fileID: 137199660692567058}
   - component: {fileID: 318084416517019615}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.043
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   - component: {fileID: 2703507218668863813}
   - component: {fileID: 8431462617883447935}
   - component: {fileID: 4621102640442861942}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 8768847240343562326}
   - component: {fileID: 5586121476677264015}
   - component: {fileID: 136938985696828474}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.045
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 7920413288200203718}
   - component: {fileID: 1985637124527078980}
   - component: {fileID: 9132260500034586182}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 5848237029026523451}
   - component: {fileID: 192384755150771546}
   - component: {fileID: 5161749383003029193}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube.042
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 1400237164640120698}
   - component: {fileID: 3201821119246030695}
   - component: {fileID: 7578008047291194123}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -838,7 +838,7 @@ GameObject:
   - component: {fileID: 2415901466164978516}
   - component: {fileID: 5394951771277259397}
   - component: {fileID: 8847986479134871964}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.026
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -928,7 +928,7 @@ GameObject:
   - component: {fileID: 8343390993488934097}
   - component: {fileID: 1646985077479722995}
   - component: {fileID: 1374839441555831039}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.038
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1018,7 @@ GameObject:
   - component: {fileID: 1502526935389239568}
   - component: {fileID: 5186211044512917782}
   - component: {fileID: 6528678867884341485}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1109,7 +1109,7 @@ GameObject:
   - component: {fileID: 1371140655323362881}
   - component: {fileID: 3324587863462964435}
   - component: {fileID: 815094076413109160}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.028
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1199,7 +1199,7 @@ GameObject:
   - component: {fileID: 4078374029254176148}
   - component: {fileID: 9189911130282310920}
   - component: {fileID: 7482082059634148254}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.030
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1289,7 +1289,7 @@ GameObject:
   - component: {fileID: 7724931073782088483}
   - component: {fileID: 1326680365418942171}
   - component: {fileID: 3426094413387481598}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.037
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1379,7 @@ GameObject:
   - component: {fileID: 5585205452467571993}
   - component: {fileID: 8943843666757983882}
   - component: {fileID: 8354350735796492697}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.027
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1469,7 +1469,7 @@ GameObject:
   - component: {fileID: 1388675767057990967}
   - component: {fileID: 5474681710769993896}
   - component: {fileID: 4266517301272173133}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.047
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1559,7 +1559,7 @@ GameObject:
   - component: {fileID: 6333158820930019987}
   - component: {fileID: 1734334356833213960}
   - component: {fileID: 6112681240355853760}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.029
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1649,7 +1649,7 @@ GameObject:
   - component: {fileID: 1549613256696564011}
   - component: {fileID: 421924059691639988}
   - component: {fileID: 8874989791560432046}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.036
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1739,7 +1739,7 @@ GameObject:
   - component: {fileID: 3412003056289873655}
   - component: {fileID: 8321972403171866710}
   - component: {fileID: 8711177287782550459}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1829,7 +1829,7 @@ GameObject:
   - component: {fileID: 3685155845505788581}
   - component: {fileID: 1304907681954035397}
   - component: {fileID: 7950196352992304283}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.046
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1919,7 +1919,7 @@ GameObject:
   - component: {fileID: 8043828796559521105}
   - component: {fileID: 7078271962864524676}
   - component: {fileID: 8556109661704048028}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.041
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2009,7 +2009,7 @@ GameObject:
   - component: {fileID: 1264720012430754535}
   - component: {fileID: 5997258067725115057}
   - component: {fileID: 7632986417025180436}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2099,7 +2099,7 @@ GameObject:
   - component: {fileID: 3082173185973856201}
   - component: {fileID: 6315158312020241651}
   - component: {fileID: 769972269353966016}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.039
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2189,7 +2189,7 @@ GameObject:
   - component: {fileID: 6673039475141228847}
   - component: {fileID: 2199998035947057380}
   - component: {fileID: 4072039162666690293}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.044
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2279,7 +2279,7 @@ GameObject:
   - component: {fileID: 3154777061468268837}
   - component: {fileID: 8988014080284406397}
   - component: {fileID: 1154170705260160960}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.040
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2367,9 +2367,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9018404845790927313}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WorkLight
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2401,7 +2401,7 @@ GameObject:
   - component: {fileID: 6489842444325550636}
   - component: {fileID: 2938760513585325162}
   - component: {fileID: 3645319444188679516}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.024
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2491,7 +2491,7 @@ GameObject:
   - component: {fileID: 3282640862745158564}
   - component: {fileID: 4011832413786106406}
   - component: {fileID: 9010624876954022355}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.042
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2581,7 +2581,7 @@ GameObject:
   - component: {fileID: 8071252093117734887}
   - component: {fileID: 2910691399042658986}
   - component: {fileID: 906600387096925293}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.049
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2671,7 +2671,7 @@ GameObject:
   - component: {fileID: 6048481441635667282}
   - component: {fileID: 4162095717475678121}
   - component: {fileID: 1028561580274181577}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder.048
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2761,7 +2761,7 @@ GameObject:
   - component: {fileID: 1316099207489936504}
   - component: {fileID: 2245719865120351745}
   - component: {fileID: 2778522784517958901}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.025
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2849,7 +2849,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2796287179645629510}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WorkLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2897,7 +2897,7 @@ GameObject:
   - component: {fileID: 8429341574108804023}
   - component: {fileID: 746856355240860149}
   - component: {fileID: 4919191346609031939}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2987,7 +2987,7 @@ GameObject:
   - component: {fileID: 2708975571836551946}
   - component: {fileID: 5900745643828976804}
   - component: {fileID: 3357288694233621900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BezierCurve.022
   m_TagString: Untagged
   m_Icon: {fileID: 0}

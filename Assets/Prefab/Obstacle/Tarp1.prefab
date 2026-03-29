@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7006254913499739801}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4468971560839731745}
   - component: {fileID: 1539047637329066996}
   - component: {fileID: 4635921674381014832}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tarp1
   m_TagString: Ground
   m_Icon: {fileID: 0}

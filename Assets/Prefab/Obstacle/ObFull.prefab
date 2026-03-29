@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 7134181084871116807}
   - component: {fileID: 2280986770256663114}
   - component: {fileID: 933242811778545421}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: SM_WoodBox_10
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 1932665015015494390}
   - component: {fileID: 6017736863313079628}
   - component: {fileID: 3634774774586761660}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WoodenBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2744,7 +2744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2453131951242696867}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: prop2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4850,9 +4850,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6941879508077964159}
   - component: {fileID: 8717550990550654013}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ObFull
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
