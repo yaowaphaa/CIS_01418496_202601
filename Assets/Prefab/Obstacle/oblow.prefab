@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3412254190552083227}
+  - component: {fileID: 5397503253243411206}
   m_Layer: 0
   m_Name: oblow
   m_TagString: Untagged
@@ -34,6 +35,27 @@ Transform:
   - {fileID: 8163649281331153775}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5397503253243411206
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650277094300651170}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.4343472, y: 1.0998025, z: 2.8489213}
+  m_Center: {x: 1.8228922, y: -1.4774854, z: 3.6023967}
 --- !u!1001 &1970322101123074905
 PrefabInstance:
   m_ObjectHideFlags: 0

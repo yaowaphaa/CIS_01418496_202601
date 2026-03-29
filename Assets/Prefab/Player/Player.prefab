@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 666754529516960374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.6980196, z: -0, w: 0.7160787}
-  m_LocalPosition: {x: -79.8, y: 1.07, z: -1.94}
+  m_LocalPosition: {x: -83.0438, y: 1.395, z: -0.51503253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -453,6 +453,7 @@ MonoBehaviour:
   - 1
   - 2
   - 3
+  lastUsedTimes: []
   crosshair: {fileID: 0}
   skillPrefabs:
   - {fileID: 3274585299066543766, guid: f34d3da3d3610bb40ae88e49a64c0b13, type: 3}
@@ -466,7 +467,7 @@ MonoBehaviour:
   spreadCount: 5
   spreadAngle: 30
   targetIndicatorPrefab: {fileID: 5669749495242813167, guid: 60f558cf29828944bb3542707f22c905, type: 3}
-  anim: {fileID: 0}
+  anim: {fileID: 1865545463045227246}
 --- !u!114 &3596969726472145982
 MonoBehaviour:
   m_ObjectHideFlags: 0
