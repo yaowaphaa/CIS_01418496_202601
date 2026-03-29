@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8006953909956575760}
   - component: {fileID: -462056444377750276}
   - component: {fileID: 9138483551911063579}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: monster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,7 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   maxHealth: 2
   attackDamage: 1
-  attackCooldown: 1
 --- !u!114 &-462056444377750276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +192,4 @@ MonoBehaviour:
   rotationSpeed: 200
   obstacleCheckDistance: 1
   detectionRange: 8
-  attackRange: 1.5
-  viewAngle: 120
-  anim: {fileID: 0}
+  stopFollowRange: 10

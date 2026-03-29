@@ -8,12 +8,8 @@ public class PlayerBossMovement : MonoBehaviour
     public float horizontalSpeed = 4f;  
     public float jumpForce = 12f;       
     public float fallMultiplier = 2.5f; 
-
-    
     public Animator childAnim;
     private Rigidbody rb;
-
-   
     public bool isGrounded;
     public bool isLanded = true;   
     public bool isIntroPlaying = false; 
@@ -22,8 +18,6 @@ public class PlayerBossMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         if (childAnim == null) childAnim = GetComponentInChildren<Animator>();
-
-        // ล็อคไม่ให้ตัวละครล้ม
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
 
@@ -101,4 +95,26 @@ public class PlayerBossMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground")) isGrounded = false;
     }
+    public IEnumerator SlowStop()
+    {
+    isIntroPlaying = true;
+    while (speed > 0 || horizontalSpeed > 0)
+    {
+        speed = Mathf.MoveTowards(speed, 0, Time.deltaTime * 3f); // ปรับเลข 3f ให้หยุดช้าหรือเร็วตามใจชอบ
+        horizontalSpeed = Mathf.MoveTowards(horizontalSpeed, 0, Time.deltaTime * 3f);
+        rb.linearVelocity = new Vector3(speed, rb.linearVelocity.y, 0); 
+        if (childAnim != null) 
+        {
+
+        }
+        
+        yield return null;
+    }
+    rb.linearVelocity = new Vector3(0, rb.linearVelocity.y, 0);
+    
+    if (childAnim != null) 
+    {
+        childAnim.SetTrigger("Idle");
+    }
+}
 }
