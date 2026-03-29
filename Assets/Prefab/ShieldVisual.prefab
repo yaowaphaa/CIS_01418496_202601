@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 196012115900035495}
   - component: {fileID: 4463527960254411652}
   - component: {fileID: 3709608776168278918}
+  - component: {fileID: 4261287102893729272}
   m_Layer: 0
   m_Name: ShieldVisual
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8512235055070505952}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -80.06, y: 15.28, z: -2.08}
+  m_LocalRotation: {x: -0.16799633, y: -0.6710346, z: 0.1753788, w: 0.70052284}
+  m_LocalPosition: {x: 0.15546969, y: 14.300073, z: 0.2515177}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -87.537, z: 28.111}
 --- !u!33 &196012115900035495
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -111,4 +112,17 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
-  m_Center: {x: 0, y: 0.1, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4261287102893729272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8512235055070505952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b98bd58e05b4969ae041234aee4d58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FacePlayer
+  playerCamera: {fileID: 6311696712055885872, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
