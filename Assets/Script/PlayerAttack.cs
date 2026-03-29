@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using TMPro;
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Battle Mana")]
@@ -31,7 +31,8 @@ public class PlayerAttack : MonoBehaviour
     public int spreadCount = 5;
     public float spreadAngle = 30f;
 
-
+    public TextMeshProUGUI manaText;
+    public TextMeshProUGUI coinText;
     public GameObject targetIndicatorPrefab;
 
     private int currentSkill = -1;
@@ -105,7 +106,10 @@ public class PlayerAttack : MonoBehaviour
 
         battleMana += amount;
         totalCoins += amount;
+        coinText.text = totalCoins.ToString();
+        manaText.text = battleMana.ToString();
 
+       
         Debug.Log("💰 เก็บเหรียญ: " + amount +
                   " | ด่าน: " + battleMana +
                   " | สะสม: " + totalCoins);
@@ -187,7 +191,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q)) currentSkill = 0;
         else if (Input.GetKeyDown(KeyCode.W)) currentSkill = 1;
-        //else if (Input.GetKeyDown(KeyCode.E)) currentSkill = 2; ห้ามเอาคอมเมนท์ออก 
+        //else if (Input.GetKeyDown(KeyCode.E)) currentSkill = 2; //ห้ามเอาคอมเมนท์ออก 
         else if (Input.GetKeyDown(KeyCode.R)) currentSkill = 3;
     }
 

@@ -533,15 +533,53 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5455559430801728959, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1831223909}
+    - target: {fileID: 5455559430801728959, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Retry
+      objectReference: {fileID: 0}
     - target: {fileID: 6400431206289901016, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1384596265}
+    - target: {fileID: 9218389626223864600, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1831223909}
+    - target: {fileID: 9218389626223864600, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Main
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+--- !u!114 &1134056546 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4862250472272818472, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+  m_PrefabInstance: {fileID: 1134056545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &1134056547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7392418758629592136, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+  m_PrefabInstance: {fileID: 1134056545}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &1217886035 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1901013218034813188, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
@@ -659,6 +697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3596969726472145982, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3762773511091615814, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
       propertyPath: gameOverPanel
       value: 
@@ -675,6 +717,14 @@ PrefabInstance:
       propertyPath: 'hearts.Array.data[2]'
       value: 
       objectReference: {fileID: 565912945}
+    - target: {fileID: 4840127486632271451, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 1134056546}
+    - target: {fileID: 4840127486632271451, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+      propertyPath: manaText
+      value: 
+      objectReference: {fileID: 1134056547}
     - target: {fileID: 4840127486632271451, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
       propertyPath: crosshair
       value: 
@@ -727,11 +777,23 @@ PrefabInstance:
       propertyPath: horizontalSpeed
       value: 14
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3596969726472145982, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+--- !u!114 &1831223909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3762773511091615814, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+  m_PrefabInstance: {fileID: 1831223908}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538d2fd0bdc43d44aa687cb3651f067d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
 --- !u!114 &2002252935 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5418910093065873457, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}

@@ -246,7 +246,6 @@ GameObject:
   - component: {fileID: 3596969726472145982}
   - component: {fileID: 7787703288857501281}
   - component: {fileID: 4673193381571634032}
-  - component: {fileID: 322864488310280306}
   - component: {fileID: 3762773511091615814}
   - component: {fileID: 5204344750162152021}
   - component: {fileID: 6633589738842397146}
@@ -512,20 +511,6 @@ MonoBehaviour:
   preImpactSpeed: 5
   impactSpeed: 12
   undergroundY: -1
---- !u!114 &322864488310280306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 666754529516960374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06d4e74273ed0894ca586f39308e2be1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  dodgeDistance: 5
-  scanDistance: 4
 --- !u!114 &3762773511091615814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +531,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gameOverPanel: {fileID: 0}
+  movementScript: {fileID: 0}
+  slowMultiplier: 0.5
+  slowDuration: 1.5
+  playerRenderer: {fileID: 0}
   damageCooldown: 0.2
 --- !u!114 &5204344750162152021
 MonoBehaviour:

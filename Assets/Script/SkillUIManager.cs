@@ -18,14 +18,6 @@ public class SkillUIManager : MonoBehaviour
     {
         if (player == null) return;
 
-        // 1. อัปเดตตัวเลข Mana
-        if (scoreText != null)
-        {
-            scoreText.text = Score.score.ToString();
-        }
-        if (manaText != null)
-            manaText.text = player.battleMana.ToString();
-
         // 2. อัปเดต Cooldown Fill
         UpdateCooldowns();
     }
