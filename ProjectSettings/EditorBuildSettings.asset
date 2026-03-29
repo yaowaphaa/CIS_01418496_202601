@@ -18,11 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/BossScene.unity
     guid: 5a488f7e8eb33d347af564b37c4d9689
   - enabled: 1
-    path: Assets/Scenes/Map1Phase1.unity
-    guid: e0ea567b7f0c16341ad4892749f67473
+    path: Assets/Scenes/ProjectLevel2.unity
+    guid: ccb8d86879452ef4bb3ad44a79ae542c
+  - enabled: 1
+    path: Assets/Scenes/ProjectLevel3.unity
+    guid: aa9b103d9401d2a4586b79eefaf093c2
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Map1Phase1.unity
+    guid: e0ea567b7f0c16341ad4892749f67473
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
