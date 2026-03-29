@@ -144,9 +144,16 @@ public class BossHealth : MonoBehaviour
         }
         if (anim != null) anim.SetTrigger("Die");
         if (healthSlider != null) healthSlider.gameObject.SetActive(false);
-        if (victoryScreen != null) victoryScreen.SetActive(true);
         if (playerMove != null) {
-            playerMove.StartCoroutine(playerMove.SlowStop());
+            playerMove.StartCoroutine(playerMove.SlowStop());  
         }
+
+        StartCoroutine(ShowVictoryDelay());
+    }
+
+    IEnumerator ShowVictoryDelay()
+    {
+        yield return new WaitForSeconds(2.5f);
+        if (victoryScreen != null) victoryScreen.SetActive(true);
     }
 }

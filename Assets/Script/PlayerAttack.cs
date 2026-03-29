@@ -48,8 +48,6 @@ public class PlayerAttack : MonoBehaviour
         if (anim == null)
             anim = GetComponentInChildren<Animator>();
 
-        Debug.Log("Animator ที่ใช้งานอยู่: " + (anim != null ? anim.name : "❌ ไม่มี"));
-
         battleMana = 0;
         lastUsedTimes = new float[skillPrefabs.Length];
         for (int i = 0; i < lastUsedTimes.Length; i++)

@@ -28,7 +28,7 @@ public class Fireball : MonoBehaviour
             BossHealth boss = other.GetComponent<BossHealth>();
             if (boss != null)
             {
-                boss.TakeDamage(damage); // ส่งดาเมจไปที่ BossHealth
+                boss.TakeDamage(damage); 
             }
         }
 
