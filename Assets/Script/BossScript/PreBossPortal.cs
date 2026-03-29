@@ -46,7 +46,6 @@ public class PreBossPortal : MonoBehaviour
             );
         }
     }
-
    IEnumerator SpawnRoutine()
     {
         yield return new WaitForSeconds(timeToWait);
@@ -67,13 +66,9 @@ public class PreBossPortal : MonoBehaviour
 
             yield return null;
         }
-
-        // ⭐ เด้งตอนจบ
         door.transform.localScale = savedTargetScale * 1.4f;
         yield return new WaitForSeconds(0.05f);
         door.transform.localScale = savedTargetScale;
-
-        // ⭐ กลับท่าเดิมเป๊ะ
         door.transform.rotation = startRot;
 
         isSpawned = true;
