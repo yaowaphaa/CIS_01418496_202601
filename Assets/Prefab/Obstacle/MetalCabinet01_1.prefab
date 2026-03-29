@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3123162234492414613}
   - component: {fileID: 2948140321160186565}
   - component: {fileID: 8686902522573447044}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: MetalCabinet01_1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1098718047699387771}
   - component: {fileID: 8131636050018386181}
   - component: {fileID: 621952112882866004}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: CabinetDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 8824328319717146198}
   - component: {fileID: 508073842365502947}
   - component: {fileID: 8439065229840486310}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cabinet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

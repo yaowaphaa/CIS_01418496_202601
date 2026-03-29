@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1891747226700474774}
   - component: {fileID: 6252291207639113631}
   - component: {fileID: 3732389018862375103}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoadDivider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 6496682945310358721}
   - component: {fileID: 6292747833168837747}
   - component: {fileID: 4990736615519366431}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RoadDivider 1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

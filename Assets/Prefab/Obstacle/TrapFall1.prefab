@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4373745298324210741}
   - component: {fileID: 3319558546513415411}
   - component: {fileID: 2073803882450282499}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: TrapFall1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

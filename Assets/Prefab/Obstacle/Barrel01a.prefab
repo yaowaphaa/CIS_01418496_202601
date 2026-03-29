@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4069208109608851750}
   - component: {fileID: 8505764138355234116}
   - component: {fileID: 7221298036185319172}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Barrel01a
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
