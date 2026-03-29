@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class Back : MonoBehaviour
 {
-    public string targetScene = "Map1Phase1"; 
+    public string targetScene = "SelectMap1"; 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

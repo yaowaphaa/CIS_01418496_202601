@@ -107,7 +107,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -125,5 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890504d60e80d3c4b9b952e8c85b5519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrystalProjectile
-  speed: 5
+  baseSpeed: 15
+  extraSpeedRatio: 1.1
   autoDestroyTime: 5
