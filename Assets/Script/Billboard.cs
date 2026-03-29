@@ -12,7 +12,7 @@ public class FacePlayer : MonoBehaviour
             transform.LookAt(playerCamera.position);
 
             // หมุน 180° ถ้ารูปกลับด้าน
-            transform.Rotate(0,-90f, 20f);
+            transform.Rotate(0,-90f, 25f);
         }
     }
 }
