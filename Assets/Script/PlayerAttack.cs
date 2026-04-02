@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections.Generic;
+
 public class PlayerAttack : MonoBehaviour
 {
     [Header("Battle Mana")]
@@ -13,9 +15,7 @@ public class PlayerAttack : MonoBehaviour
     public float[] skillCooldowns;
     public float[] lastUsedTimes;
 
-    // =========================
-    // SKILL SYSTEM
-    // =========================
+    [Header("Skill System")]
     public RectTransform crosshair;
     public GameObject[] skillPrefabs;
     public Transform firePoint;
@@ -52,26 +52,22 @@ public class PlayerAttack : MonoBehaviour
         battleMana = 0;
         lastUsedTimes = new float[skillPrefabs.Length];
         for (int i = 0; i < lastUsedTimes.Length; i++)
-        {
             lastUsedTimes[i] = -100f;
-        }
 
         currentIndicator = Instantiate(targetIndicatorPrefab);
         currentIndicator.SetActive(false);
-
     }
 
     void Update()
     {
-        SelectSkill();   // เลือกสกิลตามปุ่ม
+        SelectSkill();   // เลือก/ยกเลิกสกิล
         DetectTarget();
         UpdateCrosshair();
 
-        // 🎯 กดเมาส์เพื่อใช้สกิลอื่น ๆ (ยกเว้นโล่)
+        // 🎯 กดเมาส์เพื่อใช้สกิลที่ต้องยิง
         if (Input.GetMouseButtonDown(0) && currentSkill != -1 && currentTarget != null)
         {
-            // ยกเว้นสกิลโล่ index 2
-            if (currentSkill != 2)
+            if (currentSkill != 2) // ยกเว้นโล่
                 TryCastSkill();
         }
 
@@ -85,7 +81,6 @@ public class PlayerAttack : MonoBehaviour
 
     void UpdateCrosshair()
     {
-        // แสดง crosshair เฉพาะสกิลที่ต้องมีเป้าหมาย (ไม่ใช่โล่)
         if (currentSkill != -1 && currentSkill != 2 && crosshair != null)
         {
             crosshair.gameObject.SetActive(true);
@@ -106,13 +101,10 @@ public class PlayerAttack : MonoBehaviour
 
         battleMana += amount;
         totalCoins += amount;
-        coinText.text = totalCoins.ToString();
-        manaText.text = battleMana.ToString();
+        if (coinText != null) coinText.text = totalCoins.ToString();
+        if (manaText != null) manaText.text = battleMana.ToString();
 
-       
-        Debug.Log("💰 เก็บเหรียญ: " + amount +
-                  " | ด่าน: " + battleMana +
-                  " | สะสม: " + totalCoins);
+        Debug.Log($"💰 เก็บเหรียญ: {amount} | ด่าน: {battleMana} | สะสม: {totalCoins}");
     }
 
     bool UseMana(int amount)
@@ -125,10 +117,9 @@ public class PlayerAttack : MonoBehaviour
 
         battleMana -= amount;
 
-        Debug.Log("🎯 ใช้เหรียญ: " + amount +
-                  " | เหลือ: " + battleMana +
-                  " | สะสม: " + totalCoins);
+        if (manaText != null) manaText.text = battleMana.ToString();
 
+        Debug.Log($"🎯 ใช้เหรียญ: {amount} | เหลือ: {battleMana} | สะสม: {totalCoins}");
         return true;
     }
 
@@ -155,7 +146,6 @@ public class PlayerAttack : MonoBehaviour
         int cost = manaCosts[currentSkill];
         if (!UseMana(cost)) return;
 
-        // 🎬 เล่น Animation
         if (anim != null)
             anim.SetTrigger("Attack");
 
@@ -180,19 +170,39 @@ public class PlayerAttack : MonoBehaviour
 
         lastUsedTimes[currentSkill] = Time.time;
 
-        // ✅ ใช้แล้วให้ crosshair หายไป
         if (crosshair != null)
             crosshair.gameObject.SetActive(false);
 
-        // รีเซ็ต currentSkill หลังใช้
         currentSkill = -1;
     }
+
     void SelectSkill()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) currentSkill = 0;
-        else if (Input.GetKeyDown(KeyCode.W)) currentSkill = 1;
-        //else if (Input.GetKeyDown(KeyCode.E)) currentSkill = 2; //ห้ามเอาคอมเมนท์ออก 
-        else if (Input.GetKeyDown(KeyCode.R)) currentSkill = 3;
+        if (Input.GetKeyDown(KeyCode.Q)) ToggleSkill(0);
+        else if (Input.GetKeyDown(KeyCode.W)) ToggleSkill(1);
+        else if (Input.GetKeyDown(KeyCode.R)) ToggleSkill(3);
+    }
+
+    void ToggleSkill(int skillIndex)
+    {
+        if (currentSkill == skillIndex)
+        {
+            // ยกเลิกสกิลเดิม
+            currentSkill = -1;
+            if (crosshair != null) crosshair.gameObject.SetActive(false);
+            HideIndicator();
+            Debug.Log("❌ ยกเลิกสกิล");
+        }
+        else
+        {
+            currentSkill = skillIndex;
+            Debug.Log("✅ เลือกสกิล: " + currentSkill);
+
+            if (crosshair != null)
+                crosshair.gameObject.SetActive(currentSkill != 2);
+
+            HideIndicator();
+        }
     }
 
     void DetectTarget()
@@ -204,7 +214,6 @@ public class PlayerAttack : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 currentTarget = hit.collider.transform;
-
                 currentIndicator.SetActive(true);
 
                 Vector3 pos = currentTarget.position;
@@ -219,18 +228,16 @@ public class PlayerAttack : MonoBehaviour
                     originalColor = rend.material.color;
                     rend.material.color = Color.red;
                 }
-
                 return;
             }
         }
-
         HideIndicator();
     }
 
     void HideIndicator()
     {
         currentTarget = null;
-        currentIndicator.SetActive(false);
+        if (currentIndicator != null) currentIndicator.SetActive(false);
         ResetLastColor();
     }
 
@@ -245,20 +252,21 @@ public class PlayerAttack : MonoBehaviour
 
     void CastSkill()
     {
-        GameObject proj = Instantiate(skillPrefabs[currentSkill], firePoint.position, Quaternion.identity);
+        if (currentTarget == null) return;
 
+        GameObject proj = Instantiate(skillPrefabs[0], firePoint.position, Quaternion.identity);
         Vector3 dir = (currentTarget.position - firePoint.position).normalized;
         proj.transform.rotation = Quaternion.LookRotation(dir);
 
         Rigidbody rb = proj.GetComponent<Rigidbody>();
-        if (rb != null)
-            rb.linearVelocity = dir * projectileSpeed;
+        if (rb != null) rb.linearVelocity = dir * projectileSpeed;
     }
 
     void CastSpreadSkill()
     {
-        Vector3 baseDir = (currentTarget.position - firePoint.position).normalized;
+        if (currentTarget == null) return;
 
+        Vector3 baseDir = (currentTarget.position - firePoint.position).normalized;
         float step = spreadAngle / (spreadCount - 1);
         float start = -spreadAngle / 2f;
 
@@ -267,28 +275,23 @@ public class PlayerAttack : MonoBehaviour
             float angle = start + step * i;
             Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * baseDir;
 
-            GameObject proj = Instantiate(skillPrefabs[currentSkill], firePoint.position, Quaternion.LookRotation(dir));
+            GameObject proj = Instantiate(skillPrefabs[3], firePoint.position, Quaternion.LookRotation(dir));
 
             Rigidbody rb = proj.GetComponent<Rigidbody>();
-            if (rb != null)
-                rb.linearVelocity = dir * projectileSpeed;
+            if (rb != null) rb.linearVelocity = dir * projectileSpeed;
         }
     }
 
     // =========================
-    // ADD THIS TO PlayerAttack.cs
+    // PLAYER DAMAGE
     // =========================
     public void TakeDamage(int damage)
     {
-        // ลดค่า battleMana (เหรียญในด่าน)
         battleMana -= damage;
-
-        // ป้องกันไม่ให้ค่าติดลบ
         if (battleMana < 0) battleMana = 0;
 
-        Debug.Log("💥 Player Hit! Mana Loss: " + damage + " | Remaining: " + battleMana);
+        if (manaText != null) manaText.text = battleMana.ToString();
 
-        // (Option) ถ้ามี UI อัปเดต Mana ให้ใส่บรรทัดเรียก Update UI ตรงนี้ได้เลย
+        Debug.Log($"💥 Player Hit! Mana Loss: {damage} | Remaining: {battleMana}");
     }
-
 }

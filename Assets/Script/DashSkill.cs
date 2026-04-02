@@ -6,6 +6,7 @@ public class DashSkill : MonoBehaviour
 {
     [Header("Dash Settings")]
     public float dashSpeed = 15f;
+    public float dashDuration = 3f; // ⏱ เวลา Dash สูงสุด
     public float dashStopDistance = 1.5f;
     public int dashDamage = 30;
     public GameObject dashEffectPrefab;
@@ -45,8 +46,10 @@ public class DashSkill : MonoBehaviour
             effect.transform.SetParent(transform);
         }
 
-        // --- Dash ไปยังเป้าหมาย ---
-        while (target != null)
+        float timer = 0f;
+
+        // --- Dash ไปยังเป้าหมาย ตามเวลาที่กำหนด ---
+        while (timer < dashDuration && target != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
             float distance = Vector3.Distance(transform.position, target.position);
@@ -59,6 +62,7 @@ public class DashSkill : MonoBehaviour
                 break;
             }
 
+            timer += Time.deltaTime;
             yield return null;
         }
 
@@ -66,13 +70,9 @@ public class DashSkill : MonoBehaviour
             Destroy(effect, 0.5f);
 
         // 2️⃣ หลัง Dash → ผู้เล่นยังอมตะ, มอนที่ชนตายทันที
-        float timer = 0f;
-        
-        Debug.Log("🟢 หลัง Dash → ช่วงอมตะสั้นๆ มอนโดนตาย, ผู้เล่นไม่โดนดาเมจ");
-
+        timer = 0f;
         while (timer < postDashInvincibleDuration)
         {
-            // ตรวจสอบมอนที่ชนผู้เล่น
             Collider[] hits = Physics.OverlapSphere(transform.position, 1f); // ปรับ radius ตามต้องการ
             foreach (var hit in hits)
             {
@@ -87,7 +87,6 @@ public class DashSkill : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        
 
         // 3️⃣ หลังช่วงสั้นๆ → กลับเป็นปกติ
         if (playerHealth != null)
