@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 4091314035209280504}
   - component: {fileID: 1039344360899666531}
   - component: {fileID: 314356973351927464}
-  - component: {fileID: 2071254847445189441}
   m_Layer: 0
   m_Name: FireballProjectile
   m_TagString: Untagged
@@ -157,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Fireball
   lifeTime: 3
   damage: 10
-  speed: 20
+  speed: 50
 --- !u!96 &314356973351927464
 TrailRenderer:
   serializedVersion: 4
@@ -277,16 +276,3 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
---- !u!114 &2071254847445189441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3274585299066543766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f256f5166e910b94787ecffd84d780b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Projectiledamage
-  damage: 3

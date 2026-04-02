@@ -1,19 +1,25 @@
 using UnityEngine;
 
-public class BossRunnerX : MonoBehaviour
+public class BossMovement : MonoBehaviour
 {
     
     public Transform player; 
     public float forwardDistance = 12f; 
     public float smoothTime = 0.2f;     
-    public float activationRange = 15f; // ระยะที่ถ้า Player วิ่งมาถึง บอสถึงจะเริ่มรักษาระยะห่าง
+    public float activationRange = 15f;
     private Vector3 currentVelocity = Vector3.zero;
-    private bool hasSeenPlayer = false; // ตัวเช็คว่าเริ่มการทำงานหรือยัง
+    private bool hasSeenPlayer = false; 
+    private bool isFrozen = false;
 
+    public void FreezeMovement(bool freeze)
+    {
+        isFrozen = freeze;
+    }
 
     void LateUpdate()
     {
         if (player == null) return;
+        if (isFrozen) return;
         float distanceToPlayer = transform.position.x - player.position.x;
         if (!hasSeenPlayer && distanceToPlayer <= activationRange)
         {

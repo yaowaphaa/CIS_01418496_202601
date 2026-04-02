@@ -223,6 +223,26 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1050483395}
+    - target: {fileID: 6400431206289901016, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: skillIcons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400431206289901016, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: 'skillIcons.Array.data[0]'
+      value: 
+      objectReference: {fileID: 12179891}
+    - target: {fileID: 6400431206289901016, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: 'skillIcons.Array.data[1]'
+      value: 
+      objectReference: {fileID: 12179890}
+    - target: {fileID: 6400431206289901016, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: 'skillIcons.Array.data[2]'
+      value: 
+      objectReference: {fileID: 12179889}
+    - target: {fileID: 6400431206289901016, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+      propertyPath: 'skillIcons.Array.data[3]'
+      value: 
+      objectReference: {fileID: 12179888}
     - target: {fileID: 9218389626223864600, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -258,6 +278,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &12179888 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6509065325038657871, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+  m_PrefabInstance: {fileID: 12179885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &12179889 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7094399871023122984, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+  m_PrefabInstance: {fileID: 12179885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &12179890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1583083543873598280, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+  m_PrefabInstance: {fileID: 12179885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &12179891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7985168330737249003, guid: 09a2af4ab2269f142aca8be219d13613, type: 3}
+  m_PrefabInstance: {fileID: 12179885}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &361449683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -274,6 +338,10 @@ PrefabInstance:
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1270618475}
+    - target: {fileID: 3762773511091615814, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
+      propertyPath: damageCooldown
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3762773511091615814, guid: ba6cb6e019e1acc42ad792fda72d0718, type: 3}
       propertyPath: movementScript
       value: 

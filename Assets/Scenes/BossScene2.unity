@@ -14,19 +14,19 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0, g: 0, b: 0, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.02
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.6
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2a091566fd384d94fa99033412141e17, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -170,7 +170,7 @@ PrefabInstance:
     - target: {fileID: 1141553010036822114, guid: 62de86ed11ec858458cad45aa36afebe, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 4669293886398844059, guid: dcfa0e36915ac064098d887a1eaef1c2, type: 3}
+      objectReference: {fileID: 1598399651}
     - target: {fileID: 1141553010036822114, guid: 62de86ed11ec858458cad45aa36afebe, type: 3}
       propertyPath: enemyPrefab
       value: 
@@ -663,6 +663,14 @@ PrefabInstance:
       propertyPath: minShootDelay
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1293856039570223015, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2263719900332865296, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
+      propertyPath: bossIndex
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2263719900332865296, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
       propertyPath: healthText
       value: 
@@ -796,6 +804,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1540679489}
     - target: {fileID: 8878109523828166352, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
+      propertyPath: targetScene
+      value: ProjectLevel3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8878109523828166352, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
       propertyPath: gameOverPanel
       value: 
       objectReference: {fileID: 1540679488}
@@ -843,6 +855,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 538d2fd0bdc43d44aa687cb3651f067d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+--- !u!4 &1598399651 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2058841093952104613, guid: aedff6f1122377547a5b2625a2248c67, type: 3}
+  m_PrefabInstance: {fileID: 1598399648}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1690854895
 PrefabInstance:
   m_ObjectHideFlags: 0

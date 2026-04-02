@@ -1,9 +1,12 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public static int savedMana = 0;
+    public static int savedCoins = 0;
     [Header("Battle Mana")]
     public int battleMana = 0;
     public int[] manaCosts;
@@ -19,7 +22,7 @@ public class PlayerAttack : MonoBehaviour
     public RectTransform crosshair;
     public GameObject[] skillPrefabs;
     public Transform firePoint;
-    public float projectileSpeed = 15f;
+    public float projectileSpeed = 50f;
 
     [Header("Dash Skill")]
     public DashSkill dashSkill;
@@ -43,13 +46,47 @@ public class PlayerAttack : MonoBehaviour
 
     private Renderer lastRenderer;
     private Color originalColor;
-
+    private static readonly string[][] levelPairs = new string[][]
+    {
+        new string[] { "ProjectLevel1", "BossScene" },
+        new string[] { "ProjectLevel2", "BossScene1" },
+        new string[] { "ProjectLevel3", "BossScene2" },
+        new string[] { "ProjectLevel4", "BossScene3" },
+    };
     void Start()
     {
         if (anim == null)
             anim = GetComponentInChildren<Animator>();
 
-        battleMana = 0;
+        string currentScene = SceneManager.GetActiveScene().name;
+
+        bool isContinuing = false;
+        foreach (var pair in levelPairs)
+        {
+
+            if (currentScene == pair[1])
+            {
+                isContinuing = true;
+                break;
+            }
+        }
+
+        if (isContinuing)
+        {
+            battleMana = savedMana;
+            totalCoins = savedCoins;
+        }
+        else
+        {
+            battleMana = 0;
+            totalCoins = 0;
+            savedMana = 0;
+            //savedCoins = 0;
+        }
+
+        if (manaText != null) manaText.text = battleMana.ToString();
+        if (coinText != null) coinText.text = totalCoins.ToString();
+
         lastUsedTimes = new float[skillPrefabs.Length];
         for (int i = 0; i < lastUsedTimes.Length; i++)
             lastUsedTimes[i] = -100f;
@@ -92,19 +129,17 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    // =========================
-    // MANA / COINS
-    // =========================
     public void AddMana(int amount)
     {
         if (amount <= 0) return;
 
         battleMana += amount;
         totalCoins += amount;
+        savedMana = battleMana;   // ✅ เซฟไว้ข้ามซีน
+        savedCoins += amount;  // ✅ เซฟไว้ข้ามซีน
+
         if (coinText != null) coinText.text = totalCoins.ToString();
         if (manaText != null) manaText.text = battleMana.ToString();
-
-        Debug.Log($"💰 เก็บเหรียญ: {amount} | ด่าน: {battleMana} | สะสม: {totalCoins}");
     }
 
     bool UseMana(int amount)
@@ -146,7 +181,7 @@ public class PlayerAttack : MonoBehaviour
         int cost = manaCosts[currentSkill];
         if (!UseMana(cost)) return;
 
-        if (anim != null)
+        if (anim != null && currentSkill != 1 )
             anim.SetTrigger("Attack");
 
         // ⚔ ใช้สกิล
@@ -157,7 +192,7 @@ public class PlayerAttack : MonoBehaviour
                 break;
             case 1: // Dash
                 if (dashSkill != null)
-                    dashSkill.StartDash(currentTarget, () => Debug.Log("Dash เสร็จ"));
+                    dashSkill.StartDash(currentTarget, anim, () => Debug.Log("Dash เสร็จ"));
                 break;
             case 2: // โล่
                 if (shieldSkill != null)
@@ -177,8 +212,11 @@ public class PlayerAttack : MonoBehaviour
     }
 
     void SelectSkill()
-    {
-        if (Input.GetKeyDown(KeyCode.Q)) ToggleSkill(0);
+    {   
+        
+        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        bool isBossScene = scene == "ProjectLevel1" || scene == "ProjectLevel2" || scene == "ProjectLevel3";
+        if (Input.GetKeyDown(KeyCode.Q) && !isBossScene) ToggleSkill(0);
         else if (Input.GetKeyDown(KeyCode.W)) ToggleSkill(1);
         else if (Input.GetKeyDown(KeyCode.R)) ToggleSkill(3);
     }

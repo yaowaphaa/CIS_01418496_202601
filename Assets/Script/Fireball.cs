@@ -8,7 +8,7 @@ public class Fireball : MonoBehaviour
 {
     [Header("Fireball Settings")]
     public float lifeTime = 10f;
-    public float damage = 20f;
+    public float damage = 50f;
     public float speed = 100f;
 
     private Rigidbody rb;
@@ -39,12 +39,10 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        // 🔥 เช็คทิศทางก่อน
+    
         Vector3 directionToTarget = (other.transform.position - transform.position).normalized;
-        float dot = Vector3.Dot(transform.forward, directionToTarget);
-
-        // ถ้าอยู่ด้านหลัง ไม่ต้องทำอะไร
-        if (dot < 0.3f) return;
+        //float dot = Vector3.Dot(transform.forward, directionToTarget);
+        //if (dot < 0.3f) return;
 
         Debug.Log($"Fireball ชนโดน: {other.name} Tag: {other.tag}");
 
@@ -61,9 +59,5 @@ public class Fireball : MonoBehaviour
                 boss.TakeDamage(damage);
         }
 
-        if (other.CompareTag("Wall"))
-        {
-            Destroy(gameObject);
-        }
     }
 }

@@ -78,6 +78,16 @@ public class PreBossPortal : MonoBehaviour
     {
         if (isSpawned && other.CompareTag("Player"))
         {
+            float hp = PlayerPrefs.GetFloat("bossHealth", -1f);
+
+            // 🔁 checkpoint (ไว้ Retry)
+            PlayerPrefs.SetFloat("bossHealthCheckpoint", hp);
+
+            // 🔴 เก็บก่อนเข้าด่าน (ไว้ Menu)
+            PlayerPrefs.SetFloat("bossHealthStageStart", hp);
+
+            PlayerPrefs.Save();
+
             SceneManager.LoadScene(nextScene);
         }
     }

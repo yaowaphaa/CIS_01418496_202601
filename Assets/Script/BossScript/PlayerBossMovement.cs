@@ -100,7 +100,7 @@ public class PlayerBossMovement : MonoBehaviour
     isIntroPlaying = true;
     while (speed > 0 || horizontalSpeed > 0)
     {
-        speed = Mathf.MoveTowards(speed, 0, Time.deltaTime * 3f); // ปรับเลข 3f ให้หยุดช้าหรือเร็วตามใจชอบ
+        speed = Mathf.MoveTowards(speed, 0, Time.deltaTime * 3f); 
         horizontalSpeed = Mathf.MoveTowards(horizontalSpeed, 0, Time.deltaTime * 3f);
         rb.linearVelocity = new Vector3(speed, rb.linearVelocity.y, 0); 
         if (childAnim != null) 

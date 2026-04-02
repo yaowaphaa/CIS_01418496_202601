@@ -24,7 +24,8 @@ public class HealthSystem : MonoBehaviour
     [Header("Visual Feedback")]
     public Renderer playerRenderer; 
     private float lastDamageTime;
-    public float damageCooldown = 0.5f;
+    public float damageCooldown = 5f;
+    public string targetScene = "Sence";
 
     void Start()
     {
@@ -32,8 +33,6 @@ public class HealthSystem : MonoBehaviour
         if (movementScript == null) movementScript = GetComponent<PlayerMovement>();
         UpdateHeartsUI();
     }
-
-    // แก้เป็น OnTriggerEnter เพื่อให้เดินทะลุได้จั้บ!
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Obstacle"))
@@ -62,7 +61,7 @@ public class HealthSystem : MonoBehaviour
     IEnumerator SlowEffect()
     {
         isSlowed = true;
-        originalSpeed = movementScript.speed; // เช็คชื่อ moveSpeed ใน PlayerMovement ด้วยนะจั้บ
+        originalSpeed = movementScript.speed;
         movementScript.speed = originalSpeed * slowMultiplier;
         yield return new WaitForSeconds(slowDuration);
         movementScript.speed = originalSpeed;
@@ -102,6 +101,31 @@ public class HealthSystem : MonoBehaviour
         }
     }
 
-    public void Retry() { Time.timeScale = 1f; SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
-    public void Main() { Time.timeScale = 1f; SceneManager.LoadScene("Lobby"); }
+    public void Retry()
+{
+    Time.timeScale = 1f;
+
+    float checkpoint = PlayerPrefs.GetFloat("bossHealthCheckpoint", -1f);
+
+    if (checkpoint >= 0)
+        PlayerPrefs.SetFloat("bossHealth", checkpoint);
+
+    PlayerPrefs.Save();
+
+    SceneManager.LoadScene(targetScene);
+    }
+
+    public void Main()
+    {
+        Time.timeScale = 1f;
+
+        float stageStart = PlayerPrefs.GetFloat("bossHealthStageStart", -1f);
+
+        if (stageStart >= 0)
+            PlayerPrefs.SetFloat("bossHealth", stageStart);
+
+        PlayerPrefs.Save();
+
+        SceneManager.LoadScene("Lobby");
+    }
 }

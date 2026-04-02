@@ -78,9 +78,19 @@ public class MapUI : MonoBehaviour
     {
         if (cur == 0)
         {
+            // เริ่มใหม่
             BossHealth.savedHealth = -1f;
             BossHealth.savedHealthCheckpoint = -1f;
+
+            PlayerAttack.savedMana = 0;
+            PlayerAttack.savedCoins = 0;
         }
+        else
+        {
+            float hp = PlayerPrefs.GetFloat("bossHealth", -1f);
+            PlayerPrefs.SetFloat("bossHealthStageStart", hp);
+        }
+
         SceneManager.LoadScene(GameProgress.minionScenes[cur]);
     }
 }

@@ -6,11 +6,11 @@ public class DashSkill : MonoBehaviour
 {
     [Header("Dash Settings")]
     public float dashSpeed = 15f;
-    public float dashDuration = 3f; // ⏱ เวลา Dash สูงสุด
+    public float dashDuration = 3f; 
     public float dashStopDistance = 1.5f;
-    public int dashDamage = 30;
+    public float dashDamage = 1f;
     public GameObject dashEffectPrefab;
-    public float postDashInvincibleDuration = 0.3f; // ช่วงสั้นๆ หลัง Dash
+    public float postDashInvincibleDuration = 0.3f; 
 
     private bool isDashing = false;
     private HealthSystem playerHealth;
@@ -20,19 +20,20 @@ public class DashSkill : MonoBehaviour
         playerHealth = GetComponent<HealthSystem>();
     }
 
-    public void StartDash(Transform target, Action onComplete = null)
+    public void StartDash(Transform target, Animator animator, Action onComplete = null)
     {
         if (isDashing || target == null) return;
-        StartCoroutine(DashRoutine(target, onComplete));
+        StartCoroutine(DashRoutine(target, animator, onComplete));
     }
 
     public bool IsDashing() => isDashing;
 
-    private IEnumerator DashRoutine(Transform target, Action onComplete)
+    private IEnumerator DashRoutine(Transform target, Animator animator, Action onComplete)
     {
         isDashing = true;
-
-        // 1️⃣ ระหว่าง Dash → ผู้เล่นอมตะและไม่โดนดาเมจ
+        BossMovement boss = target.GetComponent<BossMovement>();
+        BossHealth bossHealth = target.GetComponent<BossHealth>();
+        if (boss != null) boss.FreezeMovement(true);
         if (playerHealth != null)
         {
             playerHealth.isInvincible = true;
@@ -47,8 +48,6 @@ public class DashSkill : MonoBehaviour
         }
 
         float timer = 0f;
-
-        // --- Dash ไปยังเป้าหมาย ตามเวลาที่กำหนด ---
         while (timer < dashDuration && target != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
@@ -58,7 +57,7 @@ public class DashSkill : MonoBehaviour
 
             if (distance <= dashStopDistance)
             {
-                // ไม่ทำดาเมจตอน Dash
+                if (animator != null) animator.SetTrigger("Attack"); 
                 break;
             }
 
@@ -69,26 +68,32 @@ public class DashSkill : MonoBehaviour
         if (effect != null)
             Destroy(effect, 0.5f);
 
-        // 2️⃣ หลัง Dash → ผู้เล่นยังอมตะ, มอนที่ชนตายทันที
         timer = 0f;
+        bool hasHitBoss = false;
         while (timer < postDashInvincibleDuration)
         {
-            Collider[] hits = Physics.OverlapSphere(transform.position, 1f); // ปรับ radius ตามต้องการ
+            Collider[] hits = Physics.OverlapSphere(transform.position, 1f);
             foreach (var hit in hits)
             {
                 Enemy enemy = hit.GetComponent<Enemy>();
                 if (enemy != null)
+                    enemy.TakeDamage(9999);
+
+                if (!hasHitBoss)
                 {
-                    enemy.TakeDamage(9999); // ตายทันที
-                    Debug.Log("💀 มอน " + enemy.name + " ตายจากการชนผู้เล่น");
+                    BossHealth bh = hit.GetComponent<BossHealth>();
+                    if (bh != null)
+                    {
+                        bh.TakeDamage(1f);
+                        hasHitBoss = true;
+                    }
                 }
             }
-
             timer += Time.deltaTime;
             yield return null;
         }
 
-        // 3️⃣ หลังช่วงสั้นๆ → กลับเป็นปกติ
+        if (boss != null) boss.FreezeMovement(false);
         if (playerHealth != null)
         {
             playerHealth.isInvincible = false;

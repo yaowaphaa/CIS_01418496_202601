@@ -5,21 +5,31 @@ using System.Collections;
 
 public class BossHealth : MonoBehaviour
 {
-    // เพิ่มตัวแปร Static เพื่อเก็บค่าข้ามซีน
-    public static float savedHealth = -1f;
-    public static float savedHealthCheckpoint = -1f; 
+    public static float savedHealth
+    {
+        get => PlayerPrefs.GetFloat("bossHealth", -1f);
+        set { PlayerPrefs.SetFloat("bossHealth", value); PlayerPrefs.Save(); }
+    }
+
+    public static float savedHealthCheckpoint
+    {
+        get => PlayerPrefs.GetFloat("bossHealthCheckpoint", -1f);
+        set { PlayerPrefs.SetFloat("bossHealthCheckpoint", value); PlayerPrefs.Save(); }
+    }
+
+    public int bossIndex = 0;
     public GameObject victoryScreen;
-    public float maxHealth = 1000f;
+    public float maxHealth = 100f;
     public float currentHealth;
     public Slider healthSlider;
     public TextMeshProUGUI healthText;
     public Animator anim;
     public GameObject BossModel;
     private bool isDead = false;
-    public PlayerBossMovement playerMove; 
+    public PlayerBossMovement playerMove;
 
-    public float rotationSpeed = 8f; 
-    public float jumpForce = 22f; 
+    public float rotationSpeed = 8f;
+    public float jumpForce = 22f;
     private Rigidbody rb;
     private bool hasEscaped = false;
     public float triggerPercent = 0.75f;
@@ -29,19 +39,20 @@ public class BossHealth : MonoBehaviour
     {
         victoryScreen.SetActive(false);
         rb = GetComponent<Rigidbody>();
-
-        if (savedHealth < 0) {
+        if (savedHealth < 0)
             currentHealth = maxHealth;
-        } else {
+        else
             currentHealth = savedHealth;
-        }
         savedHealthCheckpoint = currentHealth;
 
-        if (healthSlider != null) {
+        if (healthSlider != null)
+        {
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth;
         }
-        if (playerMove == null) {
+
+        if (playerMove == null)
+        {
             GameObject p = GameObject.FindGameObjectWithTag("Player");
             if (p != null) playerMove = p.GetComponent<PlayerBossMovement>();
         }
@@ -52,50 +63,55 @@ public class BossHealth : MonoBehaviour
     void Update()
     {
         if (isDead) return;
-        if (healthSlider != null && healthSlider.value != currentHealth)
+
+        if (healthSlider != null)
             healthSlider.value = Mathf.Lerp(healthSlider.value, currentHealth, Time.deltaTime * 5f);
     }
 
     public void TakeDamage(float damage)
     {
-        // เช็กอมตะช่วง Intro
         if (playerMove != null && playerMove.isIntroPlaying) return;
 
         currentHealth -= damage;
-        currentHealth = Mathf.Max(currentHealth, 0); 
-        savedHealth = currentHealth; 
-        
+        currentHealth = Mathf.Max(currentHealth, 0);
+
+        // ✅ เซฟเลือดล่าสุด
+        savedHealth = currentHealth;
+
         UpdateUI();
-        
+
         if (anim != null) anim.SetTrigger("GetHit");
 
-        // เช็กบอสหนี
         if (currentHealth <= maxHealth * triggerPercent && !hasEscaped)
         {
             hasEscaped = true;
-            OnTriggerHP?.Invoke(); 
+            OnTriggerHP?.Invoke();
             StartCoroutine(EscapeSequence());
         }
 
         if (currentHealth <= 0)
-        {
             Die();
-        }
     }
 
     IEnumerator EscapeSequence()
     {
         if (isDead) yield break;
+
         yield return new WaitForSeconds(1.5f);
+
         if (isDead) yield break;
-        if (anim != null) 
-        { 
+
+        if (anim != null)
+        {
             anim.SetTrigger("JumpAway");
             yield return StartCoroutine(RotateBackwards());
             yield return new WaitForSeconds(0.1f);
+
             if (!isDead) Jump();
+
             yield return new WaitForSeconds(0.6f);
-            if(BossModel != null) BossModel.SetActive(false); 
+
+            if (BossModel != null) BossModel.SetActive(false);
         }
     }
 
@@ -104,49 +120,59 @@ public class BossHealth : MonoBehaviour
         float targetAngle = transform.eulerAngles.y + 180f;
         float currentAngle = transform.eulerAngles.y;
         float elapsed = 0f;
-        float duration = 0.5f; 
+        float duration = 0.5f;
 
         while (elapsed < duration)
-        {   
+        {
             if (isDead) yield break;
+
             elapsed += Time.deltaTime;
             float newY = Mathf.LerpAngle(currentAngle, targetAngle, elapsed / duration);
             transform.rotation = Quaternion.Euler(0f, newY, 0f);
+
             yield return null;
         }
+
         transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
     }
 
     public void Jump()
     {
         if (rb == null) return;
+
         rb.linearVelocity = Vector3.zero;
+
         Vector3 jumpDirection = (Vector3.up * jumpForce) + (transform.forward * (jumpForce * 1.5f));
         rb.AddForce(jumpDirection, ForceMode.Impulse);
     }
 
-    void UpdateUI() 
-    { 
+    void UpdateUI()
+    {
         if (healthText != null)
-            healthText.text = Mathf.Round(currentHealth) + " / " + maxHealth; 
+            healthText.text = Mathf.Round(currentHealth) + " / " + maxHealth;
     }
 
     void Die()
-    {   
+    {
         if (isDead) return;
+        GameProgress.ClearBoss(bossIndex);
         isDead = true;
         savedHealth = -1f;
-        savedHealthCheckpoint = -1f;
-        if (rb != null) {
+
+        if (rb != null)
+        {
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             rb.isKinematic = true;
         }
+
         if (anim != null) anim.SetTrigger("Die");
-        if (healthSlider != null) healthSlider.gameObject.SetActive(false);
-        if (playerMove != null) {
-            playerMove.StartCoroutine(playerMove.SlowStop());  
-        }
+
+        if (healthSlider != null)
+            healthSlider.gameObject.SetActive(false);
+
+        if (playerMove != null)
+            playerMove.StartCoroutine(playerMove.SlowStop());
 
         StartCoroutine(ShowVictoryDelay());
     }
@@ -154,6 +180,8 @@ public class BossHealth : MonoBehaviour
     IEnumerator ShowVictoryDelay()
     {
         yield return new WaitForSeconds(2.5f);
-        if (victoryScreen != null) victoryScreen.SetActive(true);
+
+        if (victoryScreen != null)
+            victoryScreen.SetActive(true);
     }
 }
