@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 3274585299066543766}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.36193, y: 1.486, z: 0.9}
+  m_LocalPosition: {x: 122.49842, y: 1.486, z: 0.9}
   m_LocalScale: {x: 0.93633574, y: 1.0701008, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -289,3 +289,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Projectiledamage
   damage: 3
+  speed: 3000
