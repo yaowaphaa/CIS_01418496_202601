@@ -9,32 +9,29 @@ public class Fireball : MonoBehaviour
     [Header("Fireball Settings")]
     public float lifeTime = 10f;
     public float damage = 20f;
-    public float speed = 20f; // ความเร็ว Fireball
+    public float speed = 100f;
 
     private Rigidbody rb;
-    private HashSet<GameObject> hitTargets = new HashSet<GameObject>(); // ป้องกันชนซ้ำ
+    private HashSet<GameObject> hitTargets = new HashSet<GameObject>();
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = false;
-        rb.freezeRotation = true; // ป้องกันหมุนเอง
+        rb.freezeRotation = true;
     }
 
     void Start()
     {
-        Destroy(gameObject, lifeTime); // ทำลายตัวเองหลังหมดเวลา
-        rb.linearVelocity = transform.forward * speed; // เริ่มเคลื่อนที่
+        Destroy(gameObject, lifeTime);
+        rb.linearVelocity = transform.forward * speed;
     }
 
     void FixedUpdate()
     {
-        rb.linearVelocity = transform.forward * speed; // รักษาความเร็วคงที่
+        rb.linearVelocity = transform.forward * speed;
     }
 
-    /// <summary>
-    /// ปรับความเร็ว Fireball แบบไดนามิก
-    /// </summary>
     public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
@@ -42,9 +39,15 @@ public class Fireball : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        // 🔥 เช็คทิศทางก่อน
+        Vector3 directionToTarget = (other.transform.position - transform.position).normalized;
+        float dot = Vector3.Dot(transform.forward, directionToTarget);
+
+        // ถ้าอยู่ด้านหลัง ไม่ต้องทำอะไร
+        if (dot < 0.3f) return;
+
         Debug.Log($"Fireball ชนโดน: {other.name} Tag: {other.tag}");
 
-        // ตรวจสอบชน Enemy หรือ Boss และยังไม่ชนซ้ำ
         if (other.CompareTag("Enemy") && !hitTargets.Contains(other.gameObject))
         {
             hitTargets.Add(other.gameObject);
@@ -58,7 +61,6 @@ public class Fireball : MonoBehaviour
                 boss.TakeDamage(damage);
         }
 
-        // ถ้าเจอ Wall ทำลายตัวเอง
         if (other.CompareTag("Wall"))
         {
             Destroy(gameObject);
