@@ -11,7 +11,7 @@ public class PlayerAttack : MonoBehaviour
     public int battleMana = 0;
     public int[] manaCosts;
 
-    [Header("Persistent Coins (ใช้ซื้อของ)")]
+    [Header("Persistent Coins")]
     public int totalCoins = 0;
 
     [Header("Skill Cooldowns")]
