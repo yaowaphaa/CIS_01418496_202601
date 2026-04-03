@@ -326,6 +326,10 @@ PrefabInstance:
       propertyPath: floorPrefab
       value: 
       objectReference: {fileID: 5361105877904109589, guid: 4deac4afd40b7494ab2d46a5cb3ae48f, type: 3}
+    - target: {fileID: 1141553010036822114, guid: 62de86ed11ec858458cad45aa36afebe, type: 3}
+      propertyPath: maxEnemiesPerTile
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2396091168208278165, guid: 62de86ed11ec858458cad45aa36afebe, type: 3}
       propertyPath: m_Name
       value: MapG
